@@ -9,5 +9,5 @@ Telegram-бот для агрегации новостей из RSS-лент.
 
 ## Установка  
 ```bash
-git clone https://github.com/ваш-ник/NewsBot.git  
+git clone https://github.com/Letakti/NewsHive.git  
 pip install -r requirements.txt  
