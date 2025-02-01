@@ -1,0 +1,8 @@
+# Папки
+.venv/
+__pycache__/
+
+# Файлы
+*.log
+user_sources.json
+config.py

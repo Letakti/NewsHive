@@ -1,0 +1,2342 @@
+2025-02-01 18:14:37 - INFO - 🔹 Бот запущен.
+2025-02-01 18:14:37 - INFO - Start polling
+2025-02-01 18:14:37 - INFO - Run polling for bot @letaktibot id=7152154137 - 'SecureKeyBot'
+2025-02-01 18:14:59 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 18:15:02 - INFO - Update id=91151732 is handled. Duration 2264 ms by bot id=7152154137
+2025-02-01 18:15:13 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 18:15:15 - INFO - Update id=91151733 is handled. Duration 1339 ms by bot id=7152154137
+2025-02-01 18:15:19 - INFO - Update id=91151734 is not handled. Duration 1 ms by bot id=7152154137
+2025-02-01 18:15:19 - ERROR - Cause exception while process update id=91151734 by bot id=7152154137
+NameError: name 'NEWS_SOURCES' is not defined
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 113, in trigger
+    result, data = await handler.check(event, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 94, in check
+    check = await event_filter.call(*args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 48, in call
+    return await loop.run_in_executor(None, wrapped)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "f:\tgbot\handlers.py", line 41, in <lambda>
+    @router.message(lambda message: message.text in NEWS_SOURCES)
+                                                    ^^^^^^^^^^^^
+NameError: name 'NEWS_SOURCES' is not defined
+2025-02-01 18:15:47 - INFO - Update id=91151735 is not handled. Duration 1 ms by bot id=7152154137
+2025-02-01 18:15:47 - ERROR - Cause exception while process update id=91151735 by bot id=7152154137
+NameError: name 'NEWS_SOURCES' is not defined
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 113, in trigger
+    result, data = await handler.check(event, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 94, in check
+    check = await event_filter.call(*args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 48, in call
+    return await loop.run_in_executor(None, wrapped)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "f:\tgbot\handlers.py", line 41, in <lambda>
+    @router.message(lambda message: message.text in NEWS_SOURCES)
+                                                    ^^^^^^^^^^^^
+NameError: name 'NEWS_SOURCES' is not defined
+2025-02-01 18:15:53 - INFO - Update id=91151736 is not handled. Duration 1 ms by bot id=7152154137
+2025-02-01 18:15:53 - ERROR - Cause exception while process update id=91151736 by bot id=7152154137
+NameError: name 'NEWS_SOURCES' is not defined
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 113, in trigger
+    result, data = await handler.check(event, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 94, in check
+    check = await event_filter.call(*args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 48, in call
+    return await loop.run_in_executor(None, wrapped)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "f:\tgbot\handlers.py", line 41, in <lambda>
+    @router.message(lambda message: message.text in NEWS_SOURCES)
+                                                    ^^^^^^^^^^^^
+NameError: name 'NEWS_SOURCES' is not defined
+2025-02-01 18:15:54 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 18:15:55 - INFO - Update id=91151737 is handled. Duration 1008 ms by bot id=7152154137
+2025-02-01 18:16:01 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 18:16:53 - INFO - 🔹 Бот запущен.
+2025-02-01 18:16:53 - INFO - Start polling
+2025-02-01 18:16:53 - INFO - Run polling for bot @letaktibot id=7152154137 - 'SecureKeyBot'
+2025-02-01 18:17:00 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 18:17:01 - INFO - Update id=91151742 is handled. Duration 1078 ms by bot id=7152154137
+2025-02-01 18:17:05 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 18:18:16 - INFO - Update id=91151743 is not handled. Duration 70330 ms by bot id=7152154137
+2025-02-01 18:18:16 - ERROR - Cause exception while process update id=91151743 by bot id=7152154137
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 31, in send_random_news
+    news_list = get_random_news()
+  File "f:\tgbot\parser.py", line 27, in get_random_news
+    all_news.extend(get_latest_news(source))
+                    ~~~~~~~~~~~~~~~^^^^^^^^
+  File "f:\tgbot\parser.py", line 20, in get_latest_news
+    feed = feedparser.parse(url)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\http.py", line 171, in get
+    f = opener.open(request)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1348, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 18:18:16 - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-02-01 18:18:16 - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7152154137)
+2025-02-01 18:18:28 - INFO - Connection established (tryings = 1, bot id = 7152154137)
+2025-02-01 18:19:27 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 18:19:28 - INFO - Update id=91151744 is handled. Duration 616 ms by bot id=7152154137
+2025-02-01 18:19:31 - INFO - Update id=91151745 is not handled. Duration 2 ms by bot id=7152154137
+2025-02-01 18:19:31 - ERROR - Cause exception while process update id=91151745 by bot id=7152154137
+NameError: name 'NEWS_SOURCES' is not defined
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 113, in trigger
+    result, data = await handler.check(event, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 94, in check
+    check = await event_filter.call(*args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 48, in call
+    return await loop.run_in_executor(None, wrapped)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "f:\tgbot\handlers.py", line 41, in <lambda>
+    @router.message(lambda message: message.text in NEWS_SOURCES)
+                                                    ^^^^^^^^^^^^
+NameError: name 'NEWS_SOURCES' is not defined
+2025-02-01 18:23:24 - INFO - Polling stopped
+2025-02-01 18:23:24 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 18:23:24 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'SecureKeyBot'
+2025-02-01 18:23:24 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 18:34:04 - INFO - 🔹 Бот запущен.
+2025-02-01 18:34:04 - INFO - Start polling
+2025-02-01 18:34:04 - INFO - Run polling for bot @letaktibot id=7152154137 - 'SecureKeyBot'
+2025-02-01 18:34:08 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 18:34:09 - INFO - Update id=91151748 is handled. Duration 703 ms by bot id=7152154137
+2025-02-01 18:34:10 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 18:34:10 - INFO - Update id=91151749 is handled. Duration 166 ms by bot id=7152154137
+2025-02-01 18:34:13 - INFO - Update id=91151750 is not handled. Duration 1 ms by bot id=7152154137
+2025-02-01 18:34:13 - ERROR - Cause exception while process update id=91151750 by bot id=7152154137
+NameError: name 'NEWS_SOURCES' is not defined
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 113, in trigger
+    result, data = await handler.check(event, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 94, in check
+    check = await event_filter.call(*args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 48, in call
+    return await loop.run_in_executor(None, wrapped)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "f:\tgbot\handlers.py", line 41, in <lambda>
+    @router.message(lambda message: message.text in NEWS_SOURCES)
+                                                    ^^^^^^^^^^^^
+NameError: name 'NEWS_SOURCES' is not defined
+2025-02-01 18:34:41 - INFO - Update id=91151751 is not handled. Duration 1 ms by bot id=7152154137
+2025-02-01 18:34:41 - ERROR - Cause exception while process update id=91151751 by bot id=7152154137
+NameError: name 'NEWS_SOURCES' is not defined
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 113, in trigger
+    result, data = await handler.check(event, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 94, in check
+    check = await event_filter.call(*args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 48, in call
+    return await loop.run_in_executor(None, wrapped)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "f:\tgbot\handlers.py", line 41, in <lambda>
+    @router.message(lambda message: message.text in NEWS_SOURCES)
+                                                    ^^^^^^^^^^^^
+NameError: name 'NEWS_SOURCES' is not defined
+2025-02-01 18:34:46 - INFO - Polling stopped
+2025-02-01 18:34:46 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 18:34:46 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'SecureKeyBot'
+2025-02-01 18:34:46 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 18:34:52 - INFO - 🔹 Бот запущен.
+2025-02-01 18:34:52 - INFO - Start polling
+2025-02-01 18:34:52 - INFO - Run polling for bot @letaktibot id=7152154137 - 'SecureKeyBot'
+2025-02-01 18:34:57 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 18:34:58 - INFO - Update id=91151752 is handled. Duration 699 ms by bot id=7152154137
+2025-02-01 18:35:00 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 18:35:00 - INFO - Update id=91151753 is handled. Duration 219 ms by bot id=7152154137
+2025-02-01 18:35:01 - INFO - Пользователь 942801454 запросил новости из источника: Meduza.
+2025-02-01 18:35:03 - INFO - Update id=91151754 is handled. Duration 2440 ms by bot id=7152154137
+2025-02-01 18:35:05 - INFO - Update id=91151755 is handled. Duration 5 ms by bot id=7152154137
+2025-02-01 18:35:26 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 18:35:27 - INFO - Update id=91151756 is handled. Duration 181 ms by bot id=7152154137
+2025-02-01 18:35:29 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 18:35:32 - INFO - Update id=91151757 is handled. Duration 3303 ms by bot id=7152154137
+2025-02-01 18:35:43 - INFO - Пользователь 942801454 хочет добавить источник.
+2025-02-01 18:35:43 - INFO - Update id=91151758 is handled. Duration 154 ms by bot id=7152154137
+2025-02-01 18:51:13 - INFO - Пользователь 942801454 вводит название источника.
+2025-02-01 18:51:14 - INFO - Update id=91151759 is handled. Duration 197 ms by bot id=7152154137
+2025-02-01 18:51:18 - INFO - Пользователь 942801454 добавил источник: ixbt - https://www.ixbt.com/export/news.rss
+2025-02-01 18:51:18 - INFO - Update id=91151760 is handled. Duration 166 ms by bot id=7152154137
+2025-02-01 18:51:21 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 18:51:21 - INFO - Update id=91151761 is handled. Duration 193 ms by bot id=7152154137
+2025-02-01 18:51:23 - INFO - Пользователь 942801454 запросил новости из источника: ixbt.
+2025-02-01 18:51:24 - INFO - Update id=91151762 is handled. Duration 1684 ms by bot id=7152154137
+2025-02-01 18:51:43 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 18:51:44 - INFO - Update id=91151763 is handled. Duration 1082 ms by bot id=7152154137
+2025-02-01 18:51:46 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 18:51:47 - INFO - Update id=91151764 is handled. Duration 927 ms by bot id=7152154137
+2025-02-01 18:51:52 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 18:51:52 - INFO - Update id=91151765 is handled. Duration 199 ms by bot id=7152154137
+2025-02-01 18:59:13 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 18:59:18 - INFO - Update id=91151766 is handled. Duration 4313 ms by bot id=7152154137
+2025-02-01 19:00:51 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 19:00:51 - INFO - Update id=91151767 is handled. Duration 379 ms by bot id=7152154137
+2025-02-01 19:00:52 - INFO - Пользователь 942801454 запросил новости из источника: ixbt.
+2025-02-01 19:00:55 - INFO - Update id=91151768 is handled. Duration 2608 ms by bot id=7152154137
+2025-02-01 19:01:07 - INFO - Update id=91151769 is handled. Duration 1 ms by bot id=7152154137
+2025-02-01 19:01:17 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 19:01:17 - INFO - Update id=91151770 is handled. Duration 193 ms by bot id=7152154137
+2025-02-01 19:01:19 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 19:01:19 - INFO - Update id=91151771 is handled. Duration 156 ms by bot id=7152154137
+2025-02-01 19:01:22 - INFO - Пользователь 942801454 запросил новости из источника: ixbt.
+2025-02-01 19:01:23 - INFO - Update id=91151772 is handled. Duration 1346 ms by bot id=7152154137
+2025-02-01 19:02:06 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 19:02:06 - INFO - Update id=91151773 is handled. Duration 182 ms by bot id=7152154137
+2025-02-01 19:02:09 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 19:02:13 - INFO - Update id=91151774 is handled. Duration 3995 ms by bot id=7152154137
+2025-02-01 19:17:30 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-01 19:17:30 - INFO - Update id=91151775 is handled. Duration 471 ms by bot id=7152154137
+2025-02-01 19:17:32 - INFO - Пользователь 942801454 запросил новости из категории: Спорт.
+2025-02-01 19:18:21 - INFO - Update id=91151776 is not handled. Duration 49049 ms by bot id=7152154137
+2025-02-01 19:18:21 - ERROR - Cause exception while process update id=91151776 by bot id=7152154137
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 51, in send_category_news
+    news_list = get_latest_news(message.text, is_category=True)
+  File "f:\tgbot\parser.py", line 13, in get_latest_news
+    news_list.extend(get_latest_news(src))
+                     ~~~~~~~~~~~~~~~^^^^^
+  File "f:\tgbot\parser.py", line 20, in get_latest_news
+    feed = feedparser.parse(url)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\http.py", line 171, in get
+    f = opener.open(request)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1348, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 19:18:22 - INFO - Пользователь 942801454 запросил новости из категории: Экономика.
+2025-02-01 19:18:25 - INFO - Update id=91151777 is handled. Duration 3667 ms by bot id=7152154137
+2025-02-01 19:20:58 - INFO - Update id=91151778 is handled. Duration 1 ms by bot id=7152154137
+2025-02-01 19:22:28 - INFO - Update id=91151779 is handled. Duration 1 ms by bot id=7152154137
+2025-02-01 19:27:26 - INFO - Update id=91151780 is handled. Duration 1 ms by bot id=7152154137
+2025-02-01 19:27:42 - INFO - Update id=91151781 is handled. Duration 2 ms by bot id=7152154137
+2025-02-01 19:27:47 - INFO - Update id=91151782 is handled. Duration 1 ms by bot id=7152154137
+2025-02-01 19:27:53 - INFO - Пользователь 1454136738 начал работу с ботом.
+2025-02-01 19:27:54 - INFO - Update id=91151783 is handled. Duration 481 ms by bot id=7152154137
+2025-02-01 19:27:58 - INFO - Polling stopped
+2025-02-01 19:27:58 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 19:27:58 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'SecureKeyBot'
+2025-02-01 19:27:58 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 19:28:09 - INFO - 🔹 Бот запущен.
+2025-02-01 19:28:09 - INFO - Start polling
+2025-02-01 19:28:10 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 19:28:10 - INFO - Пользователь 1454136738 выбрал новости по источнику.
+2025-02-01 19:28:12 - INFO - Update id=91151786 is handled. Duration 1834 ms by bot id=7152154137
+2025-02-01 19:28:17 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 19:28:18 - INFO - Update id=91151787 is handled. Duration 170 ms by bot id=7152154137
+2025-02-01 19:28:19 - INFO - Пользователь 1454136738 запросил новости из источника: Lenta.ru.
+2025-02-01 19:28:25 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 19:28:26 - INFO - Update id=91151789 is handled. Duration 539 ms by bot id=7152154137
+2025-02-01 19:28:26 - INFO - Update id=91151788 is handled. Duration 7555 ms by bot id=7152154137
+2025-02-01 19:28:30 - INFO - Пользователь 942801454 запросил новости из источника: Meduza.
+2025-02-01 19:28:34 - INFO - Update id=91151790 is handled. Duration 3042 ms by bot id=7152154137
+2025-02-01 19:30:25 - INFO - Update id=91151791 is handled. Duration 1 ms by bot id=7152154137
+2025-02-01 19:31:28 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 19:31:28 - INFO - Update id=91151792 is handled. Duration 286 ms by bot id=7152154137
+2025-02-01 19:31:36 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 19:32:06 - INFO - Update id=91151793 is not handled. Duration 30018 ms by bot id=7152154137
+2025-02-01 19:32:06 - ERROR - Cause exception while process update id=91151793 by bot id=7152154137
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 31, in send_random_news
+    news_list = get_random_news()
+  File "f:\tgbot\parser.py", line 27, in get_random_news
+    all_news.extend(get_latest_news(source))
+                    ~~~~~~~~~~~~~~~^^^^^^^^
+  File "f:\tgbot\parser.py", line 20, in get_latest_news
+    feed = feedparser.parse(url)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\http.py", line 171, in get
+    f = opener.open(request)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1348, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 19:32:16 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 19:32:20 - INFO - Update id=91151794 is handled. Duration 4048 ms by bot id=7152154137
+2025-02-01 19:32:30 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-01 19:32:30 - INFO - Update id=91151795 is handled. Duration 301 ms by bot id=7152154137
+2025-02-01 19:32:45 - INFO - Пользователь 942801454 запросил новости из категории: Технологии.
+2025-02-01 19:32:48 - INFO - Update id=91151796 is handled. Duration 2669 ms by bot id=7152154137
+2025-02-01 19:33:01 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 19:33:01 - INFO - Update id=91151797 is handled. Duration 248 ms by bot id=7152154137
+2025-02-01 19:34:32 - INFO - Polling stopped
+2025-02-01 19:34:33 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 19:34:33 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 19:34:33 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 19:35:42 - INFO - 🔹 Бот запущен.
+2025-02-01 19:35:42 - INFO - Start polling
+2025-02-01 19:35:42 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 19:35:50 - INFO - Polling stopped
+2025-02-01 19:35:50 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 19:35:50 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 19:35:50 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 19:36:20 - INFO - 🔹 Бот запущен.
+2025-02-01 19:36:20 - INFO - Start polling
+2025-02-01 19:36:20 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 19:36:33 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 19:36:34 - INFO - Update id=91151798 is handled. Duration 1000 ms by bot id=7152154137
+2025-02-01 19:36:39 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-01 19:36:40 - INFO - Update id=91151799 is handled. Duration 597 ms by bot id=7152154137
+2025-02-01 19:36:43 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 19:36:44 - INFO - Update id=91151800 is handled. Duration 761 ms by bot id=7152154137
+2025-02-01 19:36:46 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 19:36:56 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 19:36:58 - INFO - Update id=91151802 is handled. Duration 1674 ms by bot id=7152154137
+2025-02-01 19:37:00 - INFO - Update id=91151801 is handled. Duration 13612 ms by bot id=7152154137
+2025-02-01 19:37:05 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 19:37:05 - INFO - Update id=91151803 is handled. Duration 265 ms by bot id=7152154137
+2025-02-01 19:37:06 - INFO - Пользователь 942801454 хочет добавить источник.
+2025-02-01 19:37:07 - INFO - Update id=91151804 is handled. Duration 284 ms by bot id=7152154137
+2025-02-01 19:37:15 - INFO - Пользователь 942801454 вводит название источника.
+2025-02-01 19:37:15 - INFO - Update id=91151805 is handled. Duration 285 ms by bot id=7152154137
+2025-02-01 19:37:22 - INFO - Пользователь 942801454 добавил источник: ixbt - https://www.ixbt.com/export/news.rss
+2025-02-01 19:37:23 - INFO - Update id=91151806 is handled. Duration 400 ms by bot id=7152154137
+2025-02-01 19:37:25 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 19:37:25 - INFO - Update id=91151807 is handled. Duration 437 ms by bot id=7152154137
+2025-02-01 19:37:28 - INFO - Пользователь 942801454 запросил новости из источника: ixbt.
+2025-02-01 19:37:32 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 19:37:32 - INFO - Update id=91151809 is handled. Duration 542 ms by bot id=7152154137
+2025-02-01 19:37:33 - INFO - Update id=91151808 is handled. Duration 5100 ms by bot id=7152154137
+2025-02-01 19:37:36 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 19:37:45 - INFO - Update id=91151810 is handled. Duration 8661 ms by bot id=7152154137
+2025-02-01 20:13:49 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 20:14:11 - INFO - Update id=91151811 is not handled. Duration 21498 ms by bot id=7152154137
+2025-02-01 20:14:11 - ERROR - Cause exception while process update id=91151811 by bot id=7152154137
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 31, in send_random_news
+    news_list = get_random_news()
+  File "f:\tgbot\parser.py", line 27, in get_random_news
+    all_news.extend(get_latest_news(source))
+                    ~~~~~~~~~~~~~~~^^^^^^^^
+  File "f:\tgbot\parser.py", line 20, in get_latest_news
+    feed = feedparser.parse(url)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\http.py", line 171, in get
+    f = opener.open(request)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1348, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 20:14:24 - INFO - Polling stopped
+2025-02-01 20:14:24 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 20:14:24 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 20:14:24 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 20:14:36 - INFO - 🔹 Бот запущен.
+2025-02-01 20:14:36 - INFO - Start polling
+2025-02-01 20:14:36 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 20:14:42 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-01 20:14:42 - INFO - Update id=91151812 is handled. Duration 807 ms by bot id=7152154137
+2025-02-01 20:14:44 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:14:44 - INFO - Update id=91151813 is handled. Duration 271 ms by bot id=7152154137
+2025-02-01 20:14:45 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 20:15:06 - INFO - Update id=91151814 is not handled. Duration 21151 ms by bot id=7152154137
+2025-02-01 20:15:06 - ERROR - Cause exception while process update id=91151814 by bot id=7152154137
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 31, in send_random_news
+    news_list = get_random_news()
+  File "f:\tgbot\parser.py", line 27, in get_random_news
+    all_news.extend(get_latest_news(source))
+                    ~~~~~~~~~~~~~~~^^^^^^^^
+  File "f:\tgbot\parser.py", line 20, in get_latest_news
+    feed = feedparser.parse(url)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\http.py", line 171, in get
+    f = opener.open(request)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1348, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 20:15:12 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 20:15:13 - INFO - Update id=91151815 is handled. Duration 527 ms by bot id=7152154137
+2025-02-01 20:15:17 - INFO - Пользователь 942801454 запросил новости из источника: Lenta.ru.
+2025-02-01 20:15:19 - INFO - Update id=91151816 is handled. Duration 2070 ms by bot id=7152154137
+2025-02-01 20:15:21 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:15:22 - INFO - Update id=91151817 is handled. Duration 164 ms by bot id=7152154137
+2025-02-01 20:15:24 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-01 20:15:25 - INFO - Update id=91151818 is handled. Duration 318 ms by bot id=7152154137
+2025-02-01 20:15:27 - INFO - Пользователь 942801454 запросил новости из категории: Политика.
+2025-02-01 20:15:29 - INFO - Update id=91151819 is handled. Duration 1876 ms by bot id=7152154137
+2025-02-01 20:15:41 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:15:41 - INFO - Update id=91151820 is handled. Duration 235 ms by bot id=7152154137
+2025-02-01 20:15:43 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 20:16:04 - INFO - Update id=91151821 is not handled. Duration 21178 ms by bot id=7152154137
+2025-02-01 20:16:04 - ERROR - Cause exception while process update id=91151821 by bot id=7152154137
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 31, in send_random_news
+    news_list = get_random_news()
+  File "f:\tgbot\parser.py", line 27, in get_random_news
+    all_news.extend(get_latest_news(source))
+                    ~~~~~~~~~~~~~~~^^^^^^^^
+  File "f:\tgbot\parser.py", line 20, in get_latest_news
+    feed = feedparser.parse(url)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\http.py", line 171, in get
+    f = opener.open(request)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1348, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 20:16:04 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 20:16:24 - INFO - Update id=91151822 is not handled. Duration 20346 ms by bot id=7152154137
+2025-02-01 20:16:24 - ERROR - Cause exception while process update id=91151822 by bot id=7152154137
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 31, in send_random_news
+    news_list = get_random_news()
+  File "f:\tgbot\parser.py", line 27, in get_random_news
+    all_news.extend(get_latest_news(source))
+                    ~~~~~~~~~~~~~~~^^^^^^^^
+  File "f:\tgbot\parser.py", line 20, in get_latest_news
+    feed = feedparser.parse(url)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\http.py", line 171, in get
+    f = opener.open(request)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1348, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 20:24:03 - INFO - Polling stopped
+2025-02-01 20:24:03 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 20:24:03 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 20:24:03 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 20:24:11 - INFO - 🔹 Бот запущен.
+2025-02-01 20:24:11 - INFO - Start polling
+2025-02-01 20:24:50 - ERROR - Ошибка в автоотправке: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 20:24:51 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 20:25:17 - INFO - Update id=91151823 is handled. Duration 2 ms by bot id=7152154137
+2025-02-01 20:26:02 - INFO - Polling stopped
+2025-02-01 20:26:02 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 20:26:02 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 20:26:02 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 20:26:10 - INFO - 🔹 Бот запущен.
+2025-02-01 20:26:10 - INFO - Start polling
+2025-02-01 20:26:31 - ERROR - Ошибка в автоотправке: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 20:26:31 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 20:26:31 - INFO - Update id=91151824 is handled. Duration 2 ms by bot id=7152154137
+2025-02-01 20:26:31 - INFO - Update id=91151825 is handled. Duration 2 ms by bot id=7152154137
+2025-02-01 20:26:57 - INFO - Update id=91151826 is handled. Duration 1 ms by bot id=7152154137
+2025-02-01 20:27:10 - INFO - Update id=91151827 is handled. Duration 0 ms by bot id=7152154137
+2025-02-01 20:27:28 - INFO - Update id=91151828 is handled. Duration 2 ms by bot id=7152154137
+2025-02-01 20:27:34 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 20:27:35 - INFO - Update id=91151829 is handled. Duration 420 ms by bot id=7152154137
+2025-02-01 20:27:40 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 20:28:31 - INFO - Update id=91151830 is not handled. Duration 50302 ms by bot id=7152154137
+2025-02-01 20:28:31 - ERROR - Cause exception while process update id=91151830 by bot id=7152154137
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 35, in send_random_news
+    news_list = get_random_news()
+  File "f:\tgbot\parser.py", line 30, in get_random_news
+    all_news.extend(get_latest_news(source))
+                    ~~~~~~~~~~~~~~~^^^^^^^^
+  File "f:\tgbot\parser.py", line 23, in get_latest_news
+    feed = feedparser.parse(url)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\http.py", line 171, in get
+    f = opener.open(request)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1348, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 20:28:49 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 20:28:49 - INFO - Update id=91151831 is handled. Duration 673 ms by bot id=7152154137
+2025-02-01 20:29:59 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 20:30:00 - INFO - Update id=91151832 is handled. Duration 359 ms by bot id=7152154137
+2025-02-01 20:30:01 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:30:01 - INFO - Update id=91151833 is handled. Duration 259 ms by bot id=7152154137
+2025-02-01 20:30:04 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 20:30:04 - INFO - Update id=91151834 is handled. Duration 311 ms by bot id=7152154137
+2025-02-01 20:30:05 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:30:05 - INFO - Update id=91151835 is handled. Duration 221 ms by bot id=7152154137
+2025-02-01 20:30:14 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 20:30:14 - INFO - Update id=91151836 is handled. Duration 275 ms by bot id=7152154137
+2025-02-01 20:30:15 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:30:15 - INFO - Update id=91151837 is handled. Duration 168 ms by bot id=7152154137
+2025-02-01 20:30:17 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 20:30:17 - INFO - Update id=91151838 is handled. Duration 182 ms by bot id=7152154137
+2025-02-01 20:30:18 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:30:18 - INFO - Update id=91151839 is handled. Duration 172 ms by bot id=7152154137
+2025-02-01 20:30:23 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 20:30:23 - INFO - Update id=91151840 is handled. Duration 157 ms by bot id=7152154137
+2025-02-01 20:30:24 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:30:24 - INFO - Update id=91151841 is handled. Duration 303 ms by bot id=7152154137
+2025-02-01 20:30:28 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 20:30:28 - INFO - Update id=91151842 is handled. Duration 224 ms by bot id=7152154137
+2025-02-01 20:30:29 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:30:29 - INFO - Update id=91151843 is handled. Duration 196 ms by bot id=7152154137
+2025-02-01 20:32:08 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 20:32:09 - INFO - Update id=91151844 is handled. Duration 387 ms by bot id=7152154137
+2025-02-01 20:32:10 - INFO - Пользователь 942801454 запросил новости из источника: Lenta.ru.
+2025-02-01 20:32:13 - INFO - Update id=91151845 is handled. Duration 3154 ms by bot id=7152154137
+2025-02-01 20:37:29 - INFO - Пользователь 1945985126 начал работу с ботом.
+2025-02-01 20:37:29 - INFO - Update id=91151846 is handled. Duration 186 ms by bot id=7152154137
+2025-02-01 20:37:47 - INFO - Пользователь 5294808184 запросил случайные новости.
+2025-02-01 20:38:07 - INFO - Update id=91151847 is not handled. Duration 20386 ms by bot id=7152154137
+2025-02-01 20:38:07 - ERROR - Cause exception while process update id=91151847 by bot id=7152154137
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 35, in send_random_news
+    news_list = get_random_news()
+  File "f:\tgbot\parser.py", line 30, in get_random_news
+    all_news.extend(get_latest_news(source))
+                    ~~~~~~~~~~~~~~~^^^^^^^^
+  File "f:\tgbot\parser.py", line 23, in get_latest_news
+    feed = feedparser.parse(url)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\http.py", line 171, in get
+    f = opener.open(request)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1348, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 20:40:25 - INFO - Пользователь 5294808184 начал работу с ботом.
+2025-02-01 20:40:26 - INFO - Update id=91151848 is handled. Duration 460 ms by bot id=7152154137
+2025-02-01 20:41:57 - INFO - Polling stopped
+2025-02-01 20:41:57 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 20:41:57 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 20:41:57 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 20:44:40 - INFO - 🔹 Бот запущен.
+2025-02-01 20:44:40 - INFO - Start polling
+2025-02-01 20:44:40 - ERROR - Ошибка в автоотправке: get_latest_news() missing 1 required positional argument: 'source'
+2025-02-01 20:44:40 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 20:44:52 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:44:52 - INFO - Update id=91151849 is handled. Duration 704 ms by bot id=7152154137
+2025-02-01 20:44:53 - INFO - Пользователь 942801454 хочет добавить источник.
+2025-02-01 20:44:54 - INFO - Update id=91151850 is handled. Duration 244 ms by bot id=7152154137
+2025-02-01 20:45:00 - INFO - Update id=91151851 is handled. Duration 1 ms by bot id=7152154137
+2025-02-01 20:45:28 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 20:45:29 - INFO - Update id=91151852 is handled. Duration 187 ms by bot id=7152154137
+2025-02-01 20:45:30 - INFO - Пользователь 942801454 хочет добавить источник.
+2025-02-01 20:45:31 - INFO - Update id=91151853 is handled. Duration 670 ms by bot id=7152154137
+2025-02-01 20:45:35 - INFO - Update id=91151854 is handled. Duration 2 ms by bot id=7152154137
+2025-02-01 20:47:01 - INFO - Polling stopped
+2025-02-01 20:47:02 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 20:47:02 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 20:47:02 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 20:47:08 - INFO - 🔹 Бот запущен.
+2025-02-01 20:47:08 - INFO - Start polling
+2025-02-01 20:47:08 - ERROR - Ошибка в автоотправке: get_latest_news() missing 1 required positional argument: 'source'
+2025-02-01 20:47:08 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 20:47:12 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 20:47:12 - INFO - Update id=91151855 is handled. Duration 713 ms by bot id=7152154137
+2025-02-01 20:47:14 - INFO - Пользователь 942801454 хочет добавить источник.
+2025-02-01 20:47:14 - INFO - Update id=91151856 is handled. Duration 177 ms by bot id=7152154137
+2025-02-01 20:47:19 - INFO - Update id=91151857 is handled. Duration 1 ms by bot id=7152154137
+2025-02-01 20:56:16 - INFO - Polling stopped
+2025-02-01 20:56:16 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 20:56:16 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 20:56:16 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 20:56:22 - INFO - 🔹 Бот запущен.
+2025-02-01 20:56:22 - INFO - Start polling
+2025-02-01 20:56:22 - ERROR - Ошибка в автоотправке: get_latest_news() missing 1 required positional argument: 'source'
+2025-02-01 20:56:22 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 20:56:24 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 20:56:25 - INFO - Update id=91151858 is handled. Duration 1097 ms by bot id=7152154137
+2025-02-01 20:56:30 - INFO - Пользователь 942801454 начал добавление источника.
+2025-02-01 20:56:30 - INFO - Update id=91151859 is handled. Duration 260 ms by bot id=7152154137
+2025-02-01 20:56:35 - INFO - Пользователь 942801454 отправил сообщение: ixbt
+2025-02-01 20:56:35 - INFO - Пользователь 942801454 ввел название источника: ixbt
+2025-02-01 20:56:35 - INFO - Update id=91151860 is handled. Duration 206 ms by bot id=7152154137
+2025-02-01 20:57:02 - INFO - Пользователь 942801454 отправил сообщение: https://www.ixbt.com/export/news.rss
+2025-02-01 20:57:02 - INFO - Пользователь 942801454 ввел ссылку: https://www.ixbt.com/export/news.rss
+2025-02-01 20:57:02 - INFO - Update id=91151861 is handled. Duration 262 ms by bot id=7152154137
+2025-02-01 20:57:04 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 20:57:04 - INFO - Update id=91151862 is handled. Duration 284 ms by bot id=7152154137
+2025-02-01 20:57:06 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:57:06 - INFO - Update id=91151863 is handled. Duration 219 ms by bot id=7152154137
+2025-02-01 20:57:09 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 20:57:09 - INFO - Update id=91151864 is not handled. Duration 1 ms by bot id=7152154137
+2025-02-01 20:57:09 - ERROR - Cause exception while process update id=91151864 by bot id=7152154137
+TypeError: get_latest_news() missing 1 required positional argument: 'source'
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 35, in send_random_news
+    news_list = get_random_news()
+  File "f:\tgbot\parser.py", line 41, in get_random_news
+    all_news.extend(get_latest_news(source))
+                    ~~~~~~~~~~~~~~~^^^^^^^^
+TypeError: get_latest_news() missing 1 required positional argument: 'source'
+2025-02-01 20:58:15 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 20:58:16 - INFO - Update id=91151865 is handled. Duration 240 ms by bot id=7152154137
+2025-02-01 20:58:17 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:58:18 - INFO - Update id=91151866 is handled. Duration 250 ms by bot id=7152154137
+2025-02-01 20:58:19 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-01 20:58:19 - INFO - Update id=91151867 is handled. Duration 263 ms by bot id=7152154137
+2025-02-01 20:58:20 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 20:58:20 - INFO - Update id=91151868 is handled. Duration 241 ms by bot id=7152154137
+2025-02-01 20:58:21 - INFO - Пользователь 942801454 начал добавление источника.
+2025-02-01 20:58:21 - INFO - Update id=91151869 is handled. Duration 172 ms by bot id=7152154137
+2025-02-01 20:58:29 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 20:58:29 - INFO - Update id=91151870 is handled. Duration 216 ms by bot id=7152154137
+2025-02-01 20:59:02 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 20:59:03 - INFO - Update id=91151871 is handled. Duration 406 ms by bot id=7152154137
+2025-02-01 20:59:06 - INFO - Update id=91151872 is handled. Duration 2313 ms by bot id=7152154137
+2025-02-01 20:59:11 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 20:59:11 - INFO - Update id=91151873 is handled. Duration 173 ms by bot id=7152154137
+2025-02-01 20:59:27 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 20:59:28 - INFO - Update id=91151874 is handled. Duration 333 ms by bot id=7152154137
+2025-02-01 20:59:33 - INFO - Update id=91151875 is handled. Duration 3860 ms by bot id=7152154137
+2025-02-01 21:00:08 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 21:00:08 - INFO - Update id=91151876 is handled. Duration 228 ms by bot id=7152154137
+2025-02-01 21:00:17 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 21:00:17 - INFO - Update id=91151877 is handled. Duration 217 ms by bot id=7152154137
+2025-02-01 21:00:19 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 21:00:19 - INFO - Update id=91151878 is handled. Duration 219 ms by bot id=7152154137
+2025-02-01 21:00:20 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 21:00:21 - INFO - Update id=91151879 is handled. Duration 433 ms by bot id=7152154137
+2025-02-01 21:00:47 - INFO - Polling stopped
+2025-02-01 21:00:47 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 21:00:47 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 21:00:47 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 21:02:57 - INFO - 🔹 Бот запущен.
+2025-02-01 21:02:57 - INFO - Start polling
+2025-02-01 21:02:57 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 21:02:57 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 21:03:02 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 21:03:31 - INFO - Update id=91151880 is not handled. Duration 29241 ms by bot id=7152154137
+2025-02-01 21:03:31 - ERROR - Cause exception while process update id=91151880 by bot id=7152154137
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 36, in send_random_news
+    news_list = get_random_news(user_id)  # Передаем user_id
+  File "f:\tgbot\parser.py", line 46, in get_random_news
+    news = get_latest_news(user_id, source)
+  File "f:\tgbot\parser.py", line 64, in get_latest_news
+    feed = feedparser.parse(url)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\http.py", line 171, in get
+    f = opener.open(request)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1348, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 21:05:23 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 21:05:24 - INFO - Update id=91151881 is handled. Duration 1094 ms by bot id=7152154137
+2025-02-01 21:05:31 - INFO - Update id=91151882 is handled. Duration 4478 ms by bot id=7152154137
+2025-02-01 21:06:11 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 21:06:12 - INFO - Update id=91151883 is handled. Duration 233 ms by bot id=7152154137
+2025-02-01 21:06:40 - INFO - Polling stopped
+2025-02-01 21:06:40 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 21:06:40 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 21:06:40 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 21:07:53 - INFO - 🔹 Бот запущен.
+2025-02-01 21:07:53 - INFO - Start polling
+2025-02-01 21:07:53 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 21:07:53 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 21:07:55 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 21:07:56 - INFO - Update id=91151884 is handled. Duration 674 ms by bot id=7152154137
+2025-02-01 21:08:02 - INFO - Update id=91151885 is handled. Duration 2410 ms by bot id=7152154137
+2025-02-01 21:08:12 - INFO - Пользователь 5294808184 нажал кнопку 'Назад'.
+2025-02-01 21:08:12 - INFO - Update id=91151886 is handled. Duration 184 ms by bot id=7152154137
+2025-02-01 21:08:25 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 21:08:30 - INFO - Update id=91151887 is handled. Duration 4440 ms by bot id=7152154137
+2025-02-01 21:17:00 - INFO - Пользователь 5294808184 начал добавление источника.
+2025-02-01 21:17:00 - INFO - Update id=91151888 is handled. Duration 261 ms by bot id=7152154137
+2025-02-01 21:21:45 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 21:21:45 - INFO - Update id=91151889 is handled. Duration 166 ms by bot id=7152154137
+2025-02-01 21:22:08 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 21:22:16 - INFO - Update id=91151890 is handled. Duration 7612 ms by bot id=7152154137
+2025-02-01 21:23:38 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-01 21:23:38 - INFO - Update id=91151891 is handled. Duration 200 ms by bot id=7152154137
+2025-02-01 21:23:39 - INFO - Пользователь 942801454 запросил новости из категории: Спорт.
+2025-02-01 21:23:39 - INFO - Update id=91151892 is not handled. Duration 2 ms by bot id=7152154137
+2025-02-01 21:23:39 - ERROR - Cause exception while process update id=91151892 by bot id=7152154137
+TypeError: get_latest_news() got an unexpected keyword argument 'is_category'
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 57, in send_category_news
+    news_list = get_latest_news(message.text, is_category=True)
+TypeError: get_latest_news() got an unexpected keyword argument 'is_category'
+2025-02-01 21:28:20 - INFO - Polling stopped
+2025-02-01 21:28:21 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 21:28:21 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 21:28:21 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 21:28:30 - INFO - 🔹 Бот запущен.
+2025-02-01 21:28:30 - INFO - Start polling
+2025-02-01 21:28:30 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 21:28:30 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 21:28:32 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 21:28:33 - INFO - Update id=91151893 is handled. Duration 643 ms by bot id=7152154137
+2025-02-01 21:28:35 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 21:28:35 - INFO - Update id=91151894 is handled. Duration 170 ms by bot id=7152154137
+2025-02-01 21:28:41 - INFO - Update id=91151895 is handled. Duration 1976 ms by bot id=7152154137
+2025-02-01 21:28:42 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 21:28:43 - INFO - Update id=91151896 is handled. Duration 320 ms by bot id=7152154137
+2025-02-01 21:28:44 - INFO - Пользователь 942801454 начал добавление источника.
+2025-02-01 21:28:44 - INFO - Update id=91151897 is handled. Duration 200 ms by bot id=7152154137
+2025-02-01 21:30:16 - INFO - Пользователь 942801454 отправил сообщение: Дождь-News
+2025-02-01 21:30:16 - INFO - Пользователь 942801454 ввел название источника: Дождь-News
+2025-02-01 21:30:16 - INFO - Update id=91151898 is handled. Duration 157 ms by bot id=7152154137
+2025-02-01 21:30:19 - INFO - Пользователь 942801454 отправил сообщение: https://tvrain.tv/export/rss/programs/1018.xml
+2025-02-01 21:30:19 - INFO - Пользователь 942801454 ввел ссылку: https://tvrain.tv/export/rss/programs/1018.xml
+2025-02-01 21:30:19 - INFO - Update id=91151899 is handled. Duration 174 ms by bot id=7152154137
+2025-02-01 21:30:22 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 21:30:22 - INFO - Update id=91151900 is handled. Duration 214 ms by bot id=7152154137
+2025-02-01 21:30:24 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 21:30:24 - INFO - Update id=91151901 is handled. Duration 183 ms by bot id=7152154137
+2025-02-01 22:12:58 - INFO - Polling stopped
+2025-02-01 22:12:58 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 22:12:58 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 22:12:58 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 22:13:04 - INFO - 🔹 Бот запущен.
+2025-02-01 22:13:04 - INFO - Start polling
+2025-02-01 22:13:04 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 22:13:04 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 22:13:06 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 22:13:07 - INFO - Update id=91151902 is handled. Duration 862 ms by bot id=7152154137
+2025-02-01 22:13:09 - INFO - Пользователь 942801454 отправил сообщение: Дождь-News
+2025-02-01 22:13:09 - INFO - Update id=91151903 is handled. Duration 223 ms by bot id=7152154137
+2025-02-01 22:14:02 - INFO - Пользователь 942801454 отправил сообщение: ixbt
+2025-02-01 22:14:02 - INFO - Update id=91151904 is handled. Duration 163 ms by bot id=7152154137
+2025-02-01 22:14:06 - INFO - Update id=91151905 is handled. Duration 1820 ms by bot id=7152154137
+2025-02-01 22:14:08 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 22:14:08 - INFO - Update id=91151906 is handled. Duration 189 ms by bot id=7152154137
+2025-02-01 22:16:24 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 22:16:24 - INFO - Update id=91151907 is handled. Duration 277 ms by bot id=7152154137
+2025-02-01 22:16:28 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 22:16:28 - INFO - Update id=91151908 is handled. Duration 429 ms by bot id=7152154137
+2025-02-01 22:16:30 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-01 22:16:30 - INFO - Update id=91151909 is handled. Duration 463 ms by bot id=7152154137
+2025-02-01 22:16:31 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 22:16:31 - INFO - Update id=91151910 is handled. Duration 284 ms by bot id=7152154137
+2025-02-01 22:16:32 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 22:16:41 - INFO - Update id=91151911 is handled. Duration 8681 ms by bot id=7152154137
+2025-02-01 22:16:55 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 22:16:55 - INFO - Update id=91151912 is handled. Duration 171 ms by bot id=7152154137
+2025-02-01 22:16:57 - INFO - Пользователь 942801454 отправил сообщение: Дождь-News
+2025-02-01 22:16:57 - INFO - Update id=91151913 is handled. Duration 186 ms by bot id=7152154137
+2025-02-01 22:16:58 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 22:16:58 - INFO - Update id=91151914 is handled. Duration 201 ms by bot id=7152154137
+2025-02-01 22:28:53 - INFO - Polling stopped
+2025-02-01 22:28:53 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 22:28:53 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 22:28:53 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 22:28:58 - INFO - 🔹 Бот запущен.
+2025-02-01 22:28:58 - INFO - Start polling
+2025-02-01 22:28:58 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 22:28:58 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 22:29:03 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 22:29:04 - INFO - Update id=91151915 is handled. Duration 723 ms by bot id=7152154137
+2025-02-01 22:29:06 - INFO - Пользователь 942801454 запросил новости из источника: Дождь-News.
+2025-02-01 22:29:07 - INFO - Update id=91151916 is handled. Duration 1887 ms by bot id=7152154137
+2025-02-01 22:29:11 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 22:29:11 - INFO - Update id=91151917 is handled. Duration 351 ms by bot id=7152154137
+2025-02-01 22:39:22 - INFO - Polling stopped
+2025-02-01 22:39:22 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 22:39:22 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 22:39:22 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 22:39:32 - INFO - 🔹 Бот запущен.
+2025-02-01 22:39:32 - INFO - Start polling
+2025-02-01 22:39:32 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 22:39:32 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 22:39:47 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 22:39:48 - INFO - Update id=91151918 is handled. Duration 665 ms by bot id=7152154137
+2025-02-01 22:39:50 - INFO - Пользователь 942801454 отправил сообщение: ⚙️ Управление источниками
+2025-02-01 22:39:50 - INFO - Update id=91151919 is handled. Duration 194 ms by bot id=7152154137
+2025-02-01 22:40:48 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 22:40:49 - INFO - Update id=91151920 is handled. Duration 276 ms by bot id=7152154137
+2025-02-01 22:40:50 - INFO - Пользователь 942801454 запросил новости из источника: Дождь-News.
+2025-02-01 22:40:52 - INFO - Update id=91151921 is handled. Duration 1682 ms by bot id=7152154137
+2025-02-01 22:40:53 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 22:40:53 - INFO - Update id=91151922 is handled. Duration 520 ms by bot id=7152154137
+2025-02-01 22:40:55 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 22:41:15 - INFO - Update id=91151923 is not handled. Duration 20209 ms by bot id=7152154137
+2025-02-01 22:41:15 - ERROR - Cause exception while process update id=91151923 by bot id=7152154137
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 42, in send_random_news
+    news_list = get_random_news(user_id)  # Передаем user_id
+  File "f:\tgbot\parser.py", line 46, in get_random_news
+    news = get_latest_news(user_id, source)
+  File "f:\tgbot\parser.py", line 64, in get_latest_news
+    feed = feedparser.parse(url)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 216, in parse
+    data = _open_resource(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\api.py", line 115, in _open_resource
+    return http.get(url_file_stream_or_string, etag, modified, agent, referrer, handlers, request_headers, result)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\feedparser\http.py", line 171, in get
+    f = opener.open(request)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1348, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Letakti\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+2025-02-01 22:42:27 - INFO - Polling stopped
+2025-02-01 22:42:27 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 22:42:27 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 22:42:27 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 22:42:33 - INFO - 🔹 Бот запущен.
+2025-02-01 22:42:33 - INFO - Start polling
+2025-02-01 22:42:33 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 22:42:33 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 22:42:39 - INFO - Update id=91151924 is handled. Duration 782 ms by bot id=7152154137
+2025-02-01 22:42:41 - INFO - Пользователь 942801454 отправил сообщение: 📋 Мои источники
+2025-02-01 22:42:41 - INFO - Update id=91151925 is handled. Duration 248 ms by bot id=7152154137
+2025-02-01 22:43:30 - INFO - Polling stopped
+2025-02-01 22:43:30 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 22:43:30 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 22:43:30 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 22:43:35 - INFO - 🔹 Бот запущен.
+2025-02-01 22:43:35 - INFO - Start polling
+2025-02-01 22:43:35 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 22:43:35 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 22:43:39 - INFO - Update id=91151926 is handled. Duration 880 ms by bot id=7152154137
+2025-02-01 22:43:45 - INFO - Update id=91151927 is handled. Duration 277 ms by bot id=7152154137
+2025-02-01 22:43:48 - INFO - Пользователь 942801454 запросил новости из источника: ixbt.
+2025-02-01 22:43:52 - INFO - Update id=91151928 is handled. Duration 3615 ms by bot id=7152154137
+2025-02-01 22:43:59 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 22:43:59 - INFO - Update id=91151929 is handled. Duration 261 ms by bot id=7152154137
+2025-02-01 22:44:00 - INFO - Update id=91151930 is handled. Duration 245 ms by bot id=7152154137
+2025-02-01 22:44:02 - INFO - Update id=91151931 is handled. Duration 272 ms by bot id=7152154137
+2025-02-01 22:44:05 - INFO - Update id=91151932 is handled. Duration 153 ms by bot id=7152154137
+2025-02-01 22:44:08 - INFO - Пользователь 942801454 запросил новости из источника: ixbt.
+2025-02-01 22:44:10 - INFO - Update id=91151933 is handled. Duration 1379 ms by bot id=7152154137
+2025-02-01 22:44:44 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 22:44:44 - INFO - Update id=91151934 is handled. Duration 332 ms by bot id=7152154137
+2025-02-01 22:59:15 - INFO - Polling stopped
+2025-02-01 22:59:15 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 22:59:15 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 22:59:15 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 22:59:21 - INFO - 🔹 Бот запущен.
+2025-02-01 22:59:21 - INFO - Start polling
+2025-02-01 22:59:21 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 22:59:21 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 22:59:23 - INFO - Update id=91151935 is handled. Duration 747 ms by bot id=7152154137
+2025-02-01 22:59:25 - INFO - Update id=91151936 is handled. Duration 158 ms by bot id=7152154137
+2025-02-01 22:59:26 - INFO - Пользователь 942801454 запросил новости из источника: ixbt.
+2025-02-01 22:59:30 - INFO - Update id=91151937 is handled. Duration 3339 ms by bot id=7152154137
+2025-02-01 22:59:35 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 22:59:35 - INFO - Update id=91151938 is handled. Duration 188 ms by bot id=7152154137
+2025-02-01 22:59:38 - INFO - Update id=91151939 is handled. Duration 169 ms by bot id=7152154137
+2025-02-01 22:59:39 - INFO - Update id=91151940 is handled. Duration 167 ms by bot id=7152154137
+2025-02-01 22:59:40 - INFO - Пользователь 942801454 запросил новости из источника: ixbt.
+2025-02-01 22:59:42 - INFO - Update id=91151941 is handled. Duration 1442 ms by bot id=7152154137
+2025-02-01 23:04:03 - INFO - 🔹 Бот запущен.
+2025-02-01 23:04:03 - INFO - Start polling
+2025-02-01 23:04:03 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 23:04:03 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:04:07 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:04:08 - INFO - Update id=91151942 is handled. Duration 694 ms by bot id=7152154137
+2025-02-01 23:04:10 - INFO - Update id=91151943 is handled. Duration 241 ms by bot id=7152154137
+2025-02-01 23:04:12 - INFO - Update id=91151944 is handled. Duration 155 ms by bot id=7152154137
+2025-02-01 23:04:14 - INFO - Пользователь 942801454 запросил новости из источника: ixbt.
+2025-02-01 23:04:17 - INFO - Update id=91151945 is handled. Duration 3213 ms by bot id=7152154137
+2025-02-01 23:04:53 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:04:54 - INFO - Update id=91151946 is handled. Duration 160 ms by bot id=7152154137
+2025-02-01 23:04:55 - INFO - Update id=91151947 is handled. Duration 167 ms by bot id=7152154137
+2025-02-01 23:04:56 - INFO - Update id=91151948 is handled. Duration 234 ms by bot id=7152154137
+2025-02-01 23:04:58 - INFO - Update id=91151949 is handled. Duration 192 ms by bot id=7152154137
+2025-02-01 23:05:00 - INFO - Пользователь 942801454 запросил новости из источника: ixbt.
+2025-02-01 23:05:01 - INFO - Update id=91151950 is handled. Duration 1377 ms by bot id=7152154137
+2025-02-01 23:05:02 - INFO - Пользователь 942801454 запросил новости из источника: Дождь-News.
+2025-02-01 23:05:04 - INFO - Update id=91151951 is handled. Duration 1712 ms by bot id=7152154137
+2025-02-01 23:05:05 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:05:05 - INFO - Update id=91151952 is handled. Duration 176 ms by bot id=7152154137
+2025-02-01 23:09:53 - INFO - Polling stopped
+2025-02-01 23:09:53 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 23:09:53 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:09:53 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 23:09:59 - INFO - 🔹 Бот запущен.
+2025-02-01 23:09:59 - INFO - Start polling
+2025-02-01 23:09:59 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 23:09:59 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:10:03 - INFO - Update id=91151953 is handled. Duration 764 ms by bot id=7152154137
+2025-02-01 23:10:05 - INFO - Update id=91151954 is handled. Duration 661 ms by bot id=7152154137
+2025-02-01 23:10:06 - INFO - Update id=91151955 is handled. Duration 168 ms by bot id=7152154137
+2025-02-01 23:10:09 - INFO - Update id=91151956 is handled. Duration 210 ms by bot id=7152154137
+2025-02-01 23:10:10 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:10:10 - INFO - Update id=91151957 is handled. Duration 276 ms by bot id=7152154137
+2025-02-01 23:11:06 - INFO - Update id=91151958 is handled. Duration 226 ms by bot id=7152154137
+2025-02-01 23:11:07 - INFO - Update id=91151959 is handled. Duration 168 ms by bot id=7152154137
+2025-02-01 23:11:08 - INFO - Update id=91151960 is handled. Duration 168 ms by bot id=7152154137
+2025-02-01 23:11:19 - INFO - Update id=91151961 is handled. Duration 317 ms by bot id=7152154137
+2025-02-01 23:11:23 - INFO - Update id=91151962 is handled. Duration 163 ms by bot id=7152154137
+2025-02-01 23:11:25 - INFO - Update id=91151963 is handled. Duration 230 ms by bot id=7152154137
+2025-02-01 23:11:29 - INFO - Update id=91151964 is handled. Duration 728 ms by bot id=7152154137
+2025-02-01 23:15:11 - INFO - Polling stopped
+2025-02-01 23:15:11 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 23:15:11 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:15:11 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 23:15:17 - INFO - 🔹 Бот запущен.
+2025-02-01 23:15:17 - INFO - Start polling
+2025-02-01 23:15:17 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 23:15:17 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:15:19 - INFO - Update id=91151965 is handled. Duration 786 ms by bot id=7152154137
+2025-02-01 23:15:20 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:15:21 - INFO - Update id=91151966 is handled. Duration 246 ms by bot id=7152154137
+2025-02-01 23:15:35 - INFO - Update id=91151967 is handled. Duration 424 ms by bot id=7152154137
+2025-02-01 23:15:39 - INFO - Update id=91151968 is handled. Duration 172 ms by bot id=7152154137
+2025-02-01 23:16:06 - INFO - Polling stopped
+2025-02-01 23:16:07 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 23:16:07 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:16:07 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 23:16:13 - INFO - 🔹 Бот запущен.
+2025-02-01 23:16:13 - INFO - Start polling
+2025-02-01 23:16:13 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 23:16:13 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:16:15 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:16:16 - INFO - Update id=91151969 is handled. Duration 642 ms by bot id=7152154137
+2025-02-01 23:16:18 - INFO - Update id=91151970 is handled. Duration 168 ms by bot id=7152154137
+2025-02-01 23:16:21 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:16:21 - INFO - Update id=91151971 is handled. Duration 177 ms by bot id=7152154137
+2025-02-01 23:16:22 - INFO - Update id=91151972 is handled. Duration 172 ms by bot id=7152154137
+2025-02-01 23:16:23 - INFO - Update id=91151973 is handled. Duration 175 ms by bot id=7152154137
+2025-02-01 23:16:24 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:16:25 - INFO - Update id=91151974 is handled. Duration 200 ms by bot id=7152154137
+2025-02-01 23:16:56 - INFO - Polling stopped
+2025-02-01 23:16:57 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 23:16:57 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:16:57 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 23:17:03 - INFO - 🔹 Бот запущен.
+2025-02-01 23:17:03 - INFO - Start polling
+2025-02-01 23:17:03 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 23:17:04 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:17:07 - INFO - Update id=91151975 is handled. Duration 630 ms by bot id=7152154137
+2025-02-01 23:17:08 - INFO - Update id=91151976 is handled. Duration 235 ms by bot id=7152154137
+2025-02-01 23:17:10 - INFO - Update id=91151977 is handled. Duration 160 ms by bot id=7152154137
+2025-02-01 23:17:12 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:17:12 - INFO - Update id=91151978 is handled. Duration 166 ms by bot id=7152154137
+2025-02-01 23:17:14 - INFO - Update id=91151979 is handled. Duration 172 ms by bot id=7152154137
+2025-02-01 23:17:15 - INFO - Update id=91151980 is handled. Duration 152 ms by bot id=7152154137
+2025-02-01 23:17:16 - INFO - Update id=91151981 is handled. Duration 201 ms by bot id=7152154137
+2025-02-01 23:17:17 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:17:17 - INFO - Update id=91151982 is handled. Duration 182 ms by bot id=7152154137
+2025-02-01 23:17:18 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 23:17:18 - INFO - Update id=91151983 is handled. Duration 148 ms by bot id=7152154137
+2025-02-01 23:17:19 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:17:20 - INFO - Update id=91151984 is handled. Duration 211 ms by bot id=7152154137
+2025-02-01 23:17:21 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 23:17:32 - INFO - Update id=91151985 is handled. Duration 10807 ms by bot id=7152154137
+2025-02-01 23:17:53 - INFO - Пользователь 942801454 отправил сообщение: /news
+2025-02-01 23:17:53 - INFO - Update id=91151986 is handled. Duration 313 ms by bot id=7152154137
+2025-02-01 23:25:47 - INFO - Polling stopped
+2025-02-01 23:25:47 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 23:25:47 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:25:47 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 23:25:54 - INFO - 🔹 Бот запущен.
+2025-02-01 23:25:54 - INFO - Start polling
+2025-02-01 23:25:54 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 23:25:54 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:26:05 - INFO - Update id=91151987 is handled. Duration 5942 ms by bot id=7152154137
+2025-02-01 23:26:15 - INFO - Update id=91151988 is handled. Duration 164 ms by bot id=7152154137
+2025-02-01 23:26:21 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 23:26:21 - INFO - Update id=91151989 is handled. Duration 176 ms by bot id=7152154137
+2025-02-01 23:26:49 - INFO - Update id=91151990 is handled. Duration 196 ms by bot id=7152154137
+2025-02-01 23:26:52 - INFO - Update id=91151991 is handled. Duration 169 ms by bot id=7152154137
+2025-02-01 23:26:55 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:26:56 - INFO - Update id=91151992 is handled. Duration 190 ms by bot id=7152154137
+2025-02-01 23:26:57 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 23:26:57 - INFO - Update id=91151993 is handled. Duration 192 ms by bot id=7152154137
+2025-02-01 23:26:58 - INFO - Пользователь 942801454 запросил новости из источника: Дождь-News.
+2025-02-01 23:27:00 - INFO - Update id=91151994 is handled. Duration 1332 ms by bot id=7152154137
+2025-02-01 23:27:59 - INFO - Update id=91151995 is handled. Duration 4390 ms by bot id=7152154137
+2025-02-01 23:36:42 - INFO - Polling stopped
+2025-02-01 23:36:42 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 23:36:42 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:36:42 - WARNING - ❌ Бот принудительно завершен.
+2025-02-01 23:37:02 - INFO - 🔹 Бот запущен.
+2025-02-01 23:37:02 - INFO - Start polling
+2025-02-01 23:37:02 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-01 23:37:03 - INFO - Run polling for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:37:16 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-01 23:37:16 - INFO - Update id=91151996 is handled. Duration 735 ms by bot id=7152154137
+2025-02-01 23:37:19 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 23:37:28 - INFO - Update id=91151997 is handled. Duration 8888 ms by bot id=7152154137
+2025-02-01 23:37:40 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-01 23:37:40 - INFO - Update id=91151998 is handled. Duration 171 ms by bot id=7152154137
+2025-02-01 23:37:43 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-01 23:37:43 - INFO - Update id=91151999 is handled. Duration 205 ms by bot id=7152154137
+2025-02-01 23:37:45 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-01 23:38:24 - INFO - Update id=91152000 is handled. Duration 39203 ms by bot id=7152154137
+2025-02-01 23:52:35 - INFO - Polling stopped
+2025-02-01 23:52:35 - INFO - ✅ Бот успешно завершил работу.
+2025-02-01 23:52:35 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'Новостной Бот'
+2025-02-01 23:52:35 - WARNING - ❌ Бот принудительно завершен.
