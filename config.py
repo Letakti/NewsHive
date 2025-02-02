@@ -9,10 +9,10 @@ NEWS_SOURCES = {
 }
 
 NEWS_CATEGORIES = {
-    "Политика": ["Lenta.ru"],
+    "Политика": ["Lenta.ru", "Meduza"],
     "Экономика": ["Lenta.ru"],
     "Спорт": ["Lenta.ru", "BBC"],
-    "Технологии": ["Meduza"]
+    "Технологии": ["IXBT"]
 }
 
 CHAT_ID = 123456789  # Укажи свой Telegram ID

@@ -22,6 +22,7 @@ async def main():
     commands = [
         types.BotCommand(command="start", description="Запустить бота"),
         types.BotCommand(command="help", description="Помощь"),
+        types.BotCommand(command="top", description="Основные новости"),
         types.BotCommand(command="sources", description="Управление источниками"),
         types.BotCommand(command="news", description="Случайные новости")
     ]

@@ -6,7 +6,8 @@ def main_menu():
     """Главное меню"""
     return ReplyKeyboardMarkup(keyboard=[
         [KeyboardButton(text="📰 Новости по источнику"), KeyboardButton(text="📂 Новости по категории")],
-        [KeyboardButton(text="🎲 Рандомные новости"), KeyboardButton(text="⚙️ Управление источниками")]
+        [KeyboardButton(text="🎲 Рандомные новости"), KeyboardButton(text="📌 Основные новости")],
+        [KeyboardButton(text="⚙️ Управление источниками")]
     ], resize_keyboard=True)
 
 def sources_menu(user_id: str):

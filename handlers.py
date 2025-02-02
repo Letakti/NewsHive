@@ -9,7 +9,7 @@ from logger import logger  # Импортируем логер
 
 from aiogram.filters import ChatMemberUpdatedFilter, IS_NOT_MEMBER, IS_MEMBER
 from aiogram.types import ChatMemberUpdated
-from parser import get_user_sources, remove_user_source
+from parser import get_user_sources, remove_user_source, get_top_news
 from keyboards import main_menu, sources_menu, categories_menu, manage_sources_menu, user_sources_menu  # Добавлен manage_sources_menu
 from parser import get_latest_news, get_random_news, add_user_source, load_user_sources, remove_user_source  # Добавлен load_user_sources
 
@@ -68,6 +68,21 @@ async def send_random_news(message: Message):
     news_list = get_random_news(user_id)  # Передаем user_id
     for news in news_list:
         await message.answer(news)
+
+@router.message(lambda message: message.text == "📌 Основные новости")
+async def send_top_news(message: Message):
+    user_id = str(message.from_user.id)
+    news_list = await get_top_news(user_id)  # Добавлен await
+    
+    if not news_list:
+        await message.answer("😢 Нет доступных новостей.")
+        return
+    
+    await message.answer(
+        "📌 **Основные новости:**\n\n" + "\n".join(news_list),
+        parse_mode="Markdown",
+        disable_web_page_preview=True
+    )
 
 @router.message(lambda message: message.text == "➕ Добавить источник")
 async def ask_for_source_name(message: Message):
@@ -130,19 +145,34 @@ async def show_user_sources(message: Message):
     )
     await message.answer(text)
 
-@router.message(lambda message: message.text in get_user_sources(str(message.from_user.id)))
+@router.message(lambda message: message.text in NEWS_SOURCES)
 async def send_news(message: Message):
     user_id = str(message.from_user.id)
     source = message.text
     logger.info(f"Пользователь {user_id} запросил новости из источника: {source}.")
-    news_list = get_latest_news(user_id, source)
+    
+    # Добавьте await здесь!
+    news_list = await get_latest_news(user_id, source)
+    
+    if not news_list:
+        await message.answer("😢 Не удалось загрузить новости.")
+        return
+    
     for news in news_list:
         await message.answer(news)
 
 @router.message(lambda message: message.text in NEWS_CATEGORIES)
 async def send_category_news(message: Message):
-    logger.info(f"Пользователь {message.from_user.id} запросил новости из категории: {message.text}.")
-    news_list = get_latest_news(message.text, is_category=True)
+    user_id = str(message.from_user.id)
+    category = message.text
+    logger.info(f"Пользователь {user_id} запросил новости из категории: {category}.")
+    
+    news_list = await get_latest_news(user_id, category, is_category=True)
+    
+    if not news_list:
+        await message.answer("😢 В этой категории пока нет новостей.")
+        return
+    
     for news in news_list:
         await message.answer(news)
 

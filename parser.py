@@ -1,3 +1,4 @@
+import aiohttp
 import feedparser
 import random
 from config import NEWS_SOURCES, NEWS_CATEGORIES, GROUPS_FILE
@@ -6,6 +7,25 @@ import asyncio
 from logger import logger
 import json
 from config import USER_SOURCES_JSON
+import requests
+from requests.exceptions import Timeout
+
+async def fetch_feed(url: str) -> list:
+    """Асинхронно получает и парсит RSS-ленту"""
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, timeout=10) as response:
+                content = await response.text()
+                feed = feedparser.parse(content)
+                
+                if feed.get("bozo", 0) != 0:
+                    logger.error(f"Ошибка парсинга {url}: {feed.bozo_exception}")
+                    return []
+                
+                return [f"📰 {entry.title}\n🔗 {entry.link}" for entry in feed.entries[:5]]
+    except Exception as e:
+        logger.error(f"Ошибка при запросе к {url}: {str(e)}")
+        return ["⚠️ Не удалось загрузить новости."]
 
 def load_user_sources():
     """Загружает источники из JSON-файла"""
@@ -53,16 +73,26 @@ def get_user_sources(user_id: str):
     user_sources = load_user_sources().get(str(user_id), {})
     return {**NEWS_SOURCES, **user_sources}  # Объединяем словари
 
-def get_latest_news(user_id: str, source: str):
-    """Получает новости с учетом персональных источников"""
+async def get_latest_news(user_id: str, source: str, is_category: bool = False) -> list:
+    """Асинхронно получает новости по источнику"""
+    if is_category:
+        # Логика для категорий
+        sources = NEWS_CATEGORIES.get(source, [])
+        if not sources:
+            return ["⚠️ В этой категории пока нет источников."]
+        
+        all_news = []
+        for src in sources:
+            news = await get_latest_news(user_id, src)  # Рекурсивный вызов для источников
+            all_news.extend(news)
+        return all_news[:5]
     all_sources = get_user_sources(user_id)
     url = all_sources.get(source)
     
     if not url:
         return ["⚠️ Источник не найден."]
     
-    feed = feedparser.parse(url)
-    return [f"📰 {entry.title}\n🔗 {entry.link}" for entry in feed.entries[:5]]
+    return await fetch_feed(url)
 
 
 
@@ -108,3 +138,22 @@ def remove_user_source(user_id: str, source_name: str):
     del user_sources[user_id][source_name]
     save_user_sources(user_sources)
     return f"✅ Источник '{source_name}' удален!"
+
+async def get_top_news(user_id: str, limit: int = 5) -> list:
+    """Асинхронно собирает топ-N новостей"""
+    sources = get_user_sources(user_id).values()
+    
+    # Параллельные запросы ко всем источникам
+    tasks = [fetch_feed(url) for url in sources]
+    results = await asyncio.gather(*tasks)
+    
+    # Объединяем новости и фильтруем
+    all_news = [item for sublist in results for item in sublist if "🔗" in item]
+    
+    # Форматируем в список
+    formatted_news = []
+    for idx, news in enumerate(all_news[:limit], 1):
+        title, link = news.split("\n🔗 ")
+        formatted_news.append(f"{idx}. [{title}]({link})")
+    
+    return formatted_news if formatted_news else []
