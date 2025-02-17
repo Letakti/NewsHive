@@ -65,21 +65,21 @@ async def choose_category(message: Message):
 async def send_random_news(message: Message):
     user_id = str(message.from_user.id)
     logger.info(f"Пользователь {user_id} запросил случайные новости.")
-    news_list = get_random_news(user_id)  # Передаем user_id
+    news_list = await get_random_news(user_id)  # Добавьте await
     for news in news_list:
         await message.answer(news)
 
 @router.message(lambda message: message.text == "📌 Основные новости")
 async def send_top_news(message: Message):
     user_id = str(message.from_user.id)
-    news_list = await get_top_news(user_id)  # Добавлен await
+    news_list = await get_top_news(user_id)
     
     if not news_list:
-        await message.answer("😢 Нет доступных новостей.")
+        await message.answer("😢 Нет свежих главных новостей.")
         return
     
     await message.answer(
-        "📌 **Основные новости:**\n\n" + "\n".join(news_list),
+        "📌 **Главные новости:**\n\n" + "\n".join(news_list),
         parse_mode="Markdown",
         disable_web_page_preview=True
     )
@@ -151,7 +151,6 @@ async def send_news(message: Message):
     source = message.text
     logger.info(f"Пользователь {user_id} запросил новости из источника: {source}.")
     
-    # Добавьте await здесь!
     news_list = await get_latest_news(user_id, source)
     
     if not news_list:
@@ -159,7 +158,7 @@ async def send_news(message: Message):
         return
     
     for news in news_list:
-        await message.answer(news)
+        await message.answer(news)  # Теперь news гарантированно строка
 
 @router.message(lambda message: message.text in NEWS_CATEGORIES)
 async def send_category_news(message: Message):

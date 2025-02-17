@@ -2,6 +2,9 @@ TOKEN = '7152154137:AAHAJ_6JNsl4nEUKRcsYDyMB7ZEaj6OvxqY'
 
 
 NEWS_SOURCES = {
+    "Lenta.ru (Главное)": "https://lenta.ru/rss/news",  # RSS для главных новостей
+    "BBC (Главное)": "http://feeds.bbci.co.uk/news/rss.xml",
+    # Остальные источники...
     "Lenta.ru": "https://lenta.ru/rss",
     "BBC": "http://feeds.bbci.co.uk/news/rss.xml",
     "Meduza": "https://meduza.io/rss2/all",
@@ -9,6 +12,7 @@ NEWS_SOURCES = {
 }
 
 NEWS_CATEGORIES = {
+    "📌 Основные новости": ["Lenta.ru (Главное)", "BBC (Главное)"], 
     "Политика": ["Lenta.ru", "Meduza"],
     "Экономика": ["Lenta.ru"],
     "Спорт": ["Lenta.ru", "BBC"],

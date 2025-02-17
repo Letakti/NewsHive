@@ -22,10 +22,16 @@ async def fetch_feed(url: str) -> list:
                     logger.error(f"Ошибка парсинга {url}: {feed.bozo_exception}")
                     return []
                 
-                return [f"📰 {entry.title}\n🔗 {entry.link}" for entry in feed.entries[:5]]
+                return [
+                    {
+                        "title": entry.title,
+                        "link": entry.link,
+                        "published": entry.get("published", "")
+                    } for entry in feed.entries[:5]
+                ]
     except Exception as e:
         logger.error(f"Ошибка при запросе к {url}: {str(e)}")
-        return ["⚠️ Не удалось загрузить новости."]
+        return []
 
 def load_user_sources():
     """Загружает источники из JSON-файла"""
@@ -54,19 +60,18 @@ def add_user_source(user_id: str, name: str, url: str):
     save_user_sources(user_sources)
     return f"✅ Источник {name} добавлен в вашу коллекцию!"
 
-def get_random_news(user_id: str):
-    """Выбирает 5 случайных новостей из всех источников (общих + пользовательских)"""
-    all_news = []
+async def get_random_news(user_id: str):
+    """Возвращает 5 случайных новостей"""
+    all_sources = get_user_sources(user_id)
+    sources = list(all_sources.values())
     
-    # Получаем ВСЕ источники (общие + пользовательские)
-    user_sources = load_user_sources().get(user_id, {})
-    combined_sources = {**NEWS_SOURCES, **user_sources}
+    tasks = [fetch_feed(url) for url in sources]
+    results = await asyncio.gather(*tasks)
     
-    for source in combined_sources:
-        news = get_latest_news(user_id, source)
-        all_news.extend(news)
+    all_news = [news for sublist in results for news in sublist if news]
+    random_news = random.sample(all_news, min(5, len(all_news)))
     
-    return random.sample(all_news, min(5, len(all_news)))
+    return [f"📰 {news['title']}\n🔗 {news['link']}" for news in random_news]
 
 def get_user_sources(user_id: str):
     """Возвращает все источники пользователя (стандартные + свои)"""
@@ -74,26 +79,26 @@ def get_user_sources(user_id: str):
     return {**NEWS_SOURCES, **user_sources}  # Объединяем словари
 
 async def get_latest_news(user_id: str, source: str, is_category: bool = False) -> list:
-    """Асинхронно получает новости по источнику"""
+    """Возвращает новости в виде строк (работает с источниками и категориями)"""
     if is_category:
-        # Логика для категорий
         sources = NEWS_CATEGORIES.get(source, [])
         if not sources:
             return ["⚠️ В этой категории пока нет источников."]
         
-        all_news = []
-        for src in sources:
-            news = await get_latest_news(user_id, src)  # Рекурсивный вызов для источников
-            all_news.extend(news)
+        tasks = [get_latest_news(user_id, src) for src in sources]
+        results = await asyncio.gather(*tasks)
+        all_news = [item for sublist in results for item in sublist]
         return all_news[:5]
+    
     all_sources = get_user_sources(user_id)
     url = all_sources.get(source)
     
     if not url:
         return ["⚠️ Источник не найден."]
     
-    return await fetch_feed(url)
-
+    news = await fetch_feed(url)
+    # Форматируем словари в строки
+    return [f"📰 {item['title']}\n🔗 {item['link']}" for item in news] if news else []
 
 
 async def send_auto_news(bot: Bot):
@@ -140,20 +145,19 @@ def remove_user_source(user_id: str, source_name: str):
     return f"✅ Источник '{source_name}' удален!"
 
 async def get_top_news(user_id: str, limit: int = 5) -> list:
-    """Асинхронно собирает топ-N новостей"""
-    sources = get_user_sources(user_id).values()
+    """Собирает главные новости только из категории 'Основные'"""
+    # Получаем источники для категории "Основные новости"
+    main_sources = NEWS_CATEGORIES.get("📌 Основные новости", [])
     
-    # Параллельные запросы ко всем источникам
-    tasks = [fetch_feed(url) for url in sources]
+    # Параллельно запрашиваем новости из этих источников
+    tasks = [fetch_feed(NEWS_SOURCES[source]) for source in main_sources]
     results = await asyncio.gather(*tasks)
     
-    # Объединяем новости и фильтруем
-    all_news = [item for sublist in results for item in sublist if "🔗" in item]
+    all_news = [news for sublist in results for news in sublist if news]
     
-    # Форматируем в список
+    # Форматируем вывод
     formatted_news = []
     for idx, news in enumerate(all_news[:limit], 1):
-        title, link = news.split("\n🔗 ")
-        formatted_news.append(f"{idx}. [{title}]({link})")
+        formatted_news.append(f"{idx}. [{news['title']}]({news['link']})")
     
     return formatted_news if formatted_news else []

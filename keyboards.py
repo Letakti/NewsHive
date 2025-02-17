@@ -27,8 +27,8 @@ def sources_menu(user_id: str):
     return ReplyKeyboardMarkup(keyboard=buttons, resize_keyboard=True)
 
 def categories_menu():
-    """Кнопки выбора категорий"""
-    categories = list(NEWS_CATEGORIES.keys())
+    """Кнопки выбора категорий (исключая 'Основные новости')"""
+    categories = [cat for cat in NEWS_CATEGORIES.keys() if cat != "📌 Основные новости"]  # Исключаем "Основные новости"
     buttons = []
     
     # Группируем кнопки по две в ряд

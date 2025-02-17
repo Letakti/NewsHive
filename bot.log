@@ -5500,3 +5500,316 @@ TypeError: get_latest_news() got an unexpected keyword argument 'is_category'
 2025-02-02 23:51:51 - INFO - ✅ Бот успешно завершил работу.
 2025-02-02 23:51:51 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'NewsHive'
 2025-02-02 23:51:51 - WARNING - ❌ Бот принудительно завершен.
+2025-02-17 10:21:00 - INFO - 🔹 Бот запущен.
+2025-02-17 10:21:00 - INFO - Start polling
+2025-02-17 10:21:00 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 10:21:00 - INFO - Run polling for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 10:21:28 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-17 10:21:29 - INFO - Update id=91152307 is handled. Duration 917 ms by bot id=7152154137
+2025-02-17 10:21:32 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-17 10:21:32 - INFO - Update id=91152308 is not handled. Duration 9 ms by bot id=7152154137
+2025-02-17 10:21:32 - ERROR - Cause exception while process update id=91152308 by bot id=7152154137
+TypeError: 'coroutine' object is not iterable
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 68, in send_random_news
+    news_list = get_random_news(user_id)  # Передаем user_id
+  File "f:\tgbot\parser.py", line 67, in get_random_news
+    all_news.extend(news)
+    ~~~~~~~~~~~~~~~^^^^^^
+TypeError: 'coroutine' object is not iterable
+2025-02-17 10:32:37 - INFO - Polling stopped
+2025-02-17 10:32:38 - INFO - ✅ Бот успешно завершил работу.
+2025-02-17 10:32:38 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 10:32:38 - WARNING - ❌ Бот принудительно завершен.
+2025-02-17 10:33:27 - INFO - 🔹 Бот запущен.
+2025-02-17 10:33:27 - INFO - Start polling
+2025-02-17 10:33:27 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 10:33:28 - INFO - Run polling for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 10:33:30 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-17 10:33:33 - INFO - Update id=91152309 is handled. Duration 2442 ms by bot id=7152154137
+2025-02-17 10:33:41 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-17 10:33:41 - INFO - Update id=91152310 is handled. Duration 163 ms by bot id=7152154137
+2025-02-17 10:33:43 - INFO - Пользователь 942801454 запросил новости из категории: Политика.
+2025-02-17 10:33:45 - INFO - Update id=91152311 is handled. Duration 2692 ms by bot id=7152154137
+2025-02-17 10:33:48 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-17 10:33:49 - INFO - Update id=91152312 is handled. Duration 181 ms by bot id=7152154137
+2025-02-17 10:34:04 - INFO - Update id=91152313 is handled. Duration 1599 ms by bot id=7152154137
+2025-02-17 10:34:14 - INFO - Update id=91152314 is handled. Duration 1771 ms by bot id=7152154137
+2025-02-17 10:35:55 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-17 10:35:55 - INFO - Update id=91152315 is handled. Duration 179 ms by bot id=7152154137
+2025-02-17 10:35:57 - INFO - Пользователь 942801454 запросил новости из категории: Технологии.
+2025-02-17 10:35:59 - INFO - Update id=91152316 is handled. Duration 1398 ms by bot id=7152154137
+2025-02-17 10:36:03 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-17 10:36:03 - INFO - Update id=91152317 is handled. Duration 157 ms by bot id=7152154137
+2025-02-17 11:33:27 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 12:18:44 - INFO - Polling stopped
+2025-02-17 12:18:44 - INFO - ✅ Бот успешно завершил работу.
+2025-02-17 12:18:44 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 12:18:44 - WARNING - ❌ Бот принудительно завершен.
+2025-02-17 12:18:52 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x000002BCE544E120>
+2025-02-17 12:18:52 - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x000002BCE543E9F0>, 7277.2946005)])']
+connector: <aiohttp.connector.TCPConnector object at 0x000002BCE544DD30>
+2025-02-17 12:19:18 - INFO - 🔹 Бот запущен.
+2025-02-17 12:19:18 - INFO - Start polling
+2025-02-17 12:19:18 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 12:19:18 - INFO - Run polling for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 12:19:48 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
+2025-02-17 12:19:48 - INFO - Update id=91152318 is handled. Duration 10832 ms by bot id=7152154137
+2025-02-17 12:26:05 - INFO - Polling stopped
+2025-02-17 12:26:05 - INFO - ✅ Бот успешно завершил работу.
+2025-02-17 12:26:05 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 12:26:05 - WARNING - ❌ Бот принудительно завершен.
+2025-02-17 12:26:11 - INFO - 🔹 Бот запущен.
+2025-02-17 12:26:11 - INFO - Start polling
+2025-02-17 12:26:11 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 12:26:11 - INFO - Run polling for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 12:26:24 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
+2025-02-17 12:26:25 - INFO - Update id=91152319 is handled. Duration 12573 ms by bot id=7152154137
+2025-02-17 12:28:13 - INFO - Polling stopped
+2025-02-17 12:28:13 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 12:28:13 - INFO - ✅ Бот успешно завершил работу.
+2025-02-17 12:28:13 - WARNING - ❌ Бот принудительно завершен.
+2025-02-17 12:28:20 - INFO - 🔹 Бот запущен.
+2025-02-17 12:28:20 - INFO - Start polling
+2025-02-17 12:28:20 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 12:28:20 - INFO - Run polling for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 12:28:25 - INFO - Update id=91152320 is handled. Duration 1855 ms by bot id=7152154137
+2025-02-17 12:29:02 - INFO - Polling stopped
+2025-02-17 12:29:02 - INFO - ✅ Бот успешно завершил работу.
+2025-02-17 12:29:02 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 12:29:02 - WARNING - ❌ Бот принудительно завершен.
+2025-02-17 12:29:14 - INFO - 🔹 Бот запущен.
+2025-02-17 12:29:14 - INFO - Start polling
+2025-02-17 12:29:14 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 12:29:14 - INFO - Run polling for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 12:29:21 - INFO - Update id=91152321 is handled. Duration 1975 ms by bot id=7152154137
+2025-02-17 13:10:11 - INFO - Update id=91152322 is handled. Duration 2629 ms by bot id=7152154137
+2025-02-17 13:11:53 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-17 13:11:53 - INFO - Update id=91152323 is handled. Duration 224 ms by bot id=7152154137
+2025-02-17 13:11:55 - INFO - Пользователь 942801454 запросил новости из источника: Lenta.ru.
+2025-02-17 13:11:56 - INFO - Update id=91152324 is handled. Duration 1704 ms by bot id=7152154137
+2025-02-17 13:14:38 - INFO - Polling stopped
+2025-02-17 13:14:38 - INFO - ✅ Бот успешно завершил работу.
+2025-02-17 13:14:38 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 13:14:38 - WARNING - ❌ Бот принудительно завершен.
+2025-02-17 13:14:48 - INFO - 🔹 Бот запущен.
+2025-02-17 13:14:48 - INFO - Start polling
+2025-02-17 13:14:48 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 13:14:49 - INFO - Run polling for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 13:14:55 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-17 13:14:56 - INFO - Update id=91152325 is handled. Duration 861 ms by bot id=7152154137
+2025-02-17 13:15:08 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
+2025-02-17 13:15:08 - INFO - Update id=91152326 is handled. Duration 10942 ms by bot id=7152154137
+2025-02-17 13:15:17 - INFO - Пользователь 942801454 запросил случайные новости.
+2025-02-17 13:15:28 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
+2025-02-17 13:15:28 - INFO - Update id=91152327 is handled. Duration 11164 ms by bot id=7152154137
+2025-02-17 13:15:36 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-17 13:15:37 - INFO - Update id=91152328 is handled. Duration 145 ms by bot id=7152154137
+2025-02-17 13:15:38 - INFO - Пользователь 942801454 запросил новости из источника: Lenta.ru.
+2025-02-17 13:15:38 - INFO - Update id=91152329 is not handled. Duration 580 ms by bot id=7152154137
+2025-02-17 13:15:38 - ERROR - Cause exception while process update id=91152329 by bot id=7152154137
+ValidationError: 1 validation error for SendMessage
+text
+  Input should be a valid string [type=string_type, input_value={'title': 'Раскрыт...eb 2025 13:13:00 +0300'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_type
+Traceback (most recent call last):
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "f:\tgbot\handlers.py", line 162, in send_news
+    await message.answer(news)
+          ~~~~~~~~~~~~~~^^^^^^
+  File "F:\tgbot\.venv\Lib\site-packages\aiogram\types\message.py", line 2091, in answer
+    return SendMessage(
+           ~~~~~~~~~~~^
+        chat_id=self.chat.id,
+        ^^^^^^^^^^^^^^^^^^^^^
+    ...<15 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).as_(self._bot)
+    ^
+  File "F:\tgbot\.venv\Lib\site-packages\pydantic\main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for SendMessage
+text
+  Input should be a valid string [type=string_type, input_value={'title': 'Раскрыт...eb 2025 13:13:00 +0300'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_type
+2025-02-17 14:14:48 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 14:16:12 - INFO - Polling stopped
+2025-02-17 14:16:12 - INFO - ✅ Бот успешно завершил работу.
+2025-02-17 14:16:12 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 14:16:12 - WARNING - ❌ Бот принудительно завершен.
+2025-02-17 14:16:21 - INFO - 🔹 Бот запущен.
+2025-02-17 14:16:21 - INFO - Start polling
+2025-02-17 14:16:21 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 14:16:21 - INFO - Run polling for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 14:16:33 - INFO - Пользователь 942801454 запросил новости из источника: Lenta.ru.
+2025-02-17 14:16:35 - INFO - Update id=91152330 is handled. Duration 2317 ms by bot id=7152154137
+2025-02-17 14:16:40 - INFO - Пользователь 942801454 запросил новости из источника: BBC.
+2025-02-17 14:16:51 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
+2025-02-17 14:16:51 - INFO - Update id=91152331 is handled. Duration 10613 ms by bot id=7152154137
+2025-02-17 14:16:59 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-17 14:17:00 - INFO - Update id=91152332 is handled. Duration 253 ms by bot id=7152154137
+2025-02-17 14:17:12 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
+2025-02-17 14:17:12 - INFO - Update id=91152333 is handled. Duration 10992 ms by bot id=7152154137
+2025-02-17 14:57:59 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
+2025-02-17 14:58:00 - INFO - Update id=91152334 is handled. Duration 11127 ms by bot id=7152154137
+2025-02-17 15:03:14 - INFO - Пользователь 942801454 начал работу с ботом.
+2025-02-17 15:03:14 - INFO - Update id=91152335 is handled. Duration 259 ms by bot id=7152154137
+2025-02-17 15:03:28 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
+2025-02-17 15:03:28 - INFO - Update id=91152336 is handled. Duration 10607 ms by bot id=7152154137
+2025-02-17 15:03:35 - INFO - Пользователь 942801454 выбрал новости по источнику.
+2025-02-17 15:03:35 - INFO - Update id=91152337 is handled. Duration 163 ms by bot id=7152154137
+2025-02-17 15:03:38 - INFO - Пользователь 942801454 запросил новости из источника: Meduza.
+2025-02-17 15:03:39 - INFO - Update id=91152338 is handled. Duration 1544 ms by bot id=7152154137
+2025-02-17 15:13:37 - INFO - Пользователь 5294808184 запросил новости из источника: Lenta.ru.
+2025-02-17 15:13:39 - INFO - Update id=91152339 is handled. Duration 1774 ms by bot id=7152154137
+2025-02-17 15:13:53 - INFO - Пользователь 5294808184 отправил сообщение: Охуела падла
+2025-02-17 15:13:53 - INFO - Update id=91152340 is handled. Duration 304 ms by bot id=7152154137
+2025-02-17 15:13:57 - INFO - Пользователь 5294808184 нажал кнопку 'Назад'.
+2025-02-17 15:13:57 - INFO - Update id=91152341 is handled. Duration 254 ms by bot id=7152154137
+2025-02-17 15:14:16 - INFO - Пользователь 942801454 отправил сообщение: долбаеб
+2025-02-17 15:14:17 - INFO - Update id=91152342 is handled. Duration 208 ms by bot id=7152154137
+2025-02-17 15:16:21 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 15:23:52 - INFO - Polling stopped
+2025-02-17 15:23:52 - INFO - ✅ Бот успешно завершил работу.
+2025-02-17 15:23:52 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 15:23:52 - WARNING - ❌ Бот принудительно завершен.
+2025-02-17 15:23:58 - INFO - 🔹 Бот запущен.
+2025-02-17 15:23:58 - INFO - Start polling
+2025-02-17 15:23:58 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 15:23:58 - INFO - Run polling for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 15:24:29 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
+2025-02-17 15:24:29 - INFO - Update id=91152343 is handled. Duration 11513 ms by bot id=7152154137
+2025-02-17 15:24:42 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-17 15:24:43 - INFO - Update id=91152344 is handled. Duration 154 ms by bot id=7152154137
+2025-02-17 15:24:56 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
+2025-02-17 15:24:56 - INFO - Update id=91152345 is handled. Duration 11009 ms by bot id=7152154137
+2025-02-17 15:25:04 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-17 15:25:04 - INFO - Update id=91152346 is handled. Duration 161 ms by bot id=7152154137
+2025-02-17 15:27:24 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-17 15:27:24 - INFO - Update id=91152347 is handled. Duration 143 ms by bot id=7152154137
+2025-02-17 15:27:25 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-17 15:27:25 - INFO - Update id=91152348 is handled. Duration 312 ms by bot id=7152154137
+2025-02-17 15:27:59 - INFO - Polling stopped
+2025-02-17 15:28:00 - INFO - ✅ Бот успешно завершил работу.
+2025-02-17 15:28:00 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 15:28:00 - WARNING - ❌ Бот принудительно завершен.
