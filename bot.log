@@ -5813,3 +5813,16 @@ text
 2025-02-17 15:28:00 - INFO - ✅ Бот успешно завершил работу.
 2025-02-17 15:28:00 - INFO - Polling stopped for bot @letaktibot id=7152154137 - 'NewsHive'
 2025-02-17 15:28:00 - WARNING - ❌ Бот принудительно завершен.
+2025-02-17 15:28:07 - INFO - 🔹 Бот запущен.
+2025-02-17 15:28:07 - INFO - Start polling
+2025-02-17 15:28:07 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 15:28:07 - INFO - Run polling for bot @letaktibot id=7152154137 - 'NewsHive'
+2025-02-17 15:28:15 - INFO - Пользователь 942801454 выбрал новости по категории.
+2025-02-17 15:28:15 - INFO - Update id=91152350 is handled. Duration 677 ms by bot id=7152154137
+2025-02-17 15:28:17 - INFO - Пользователь 942801454 нажал кнопку 'Назад'.
+2025-02-17 15:28:17 - INFO - Update id=91152351 is handled. Duration 228 ms by bot id=7152154137
+2025-02-17 15:28:29 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
+2025-02-17 15:28:29 - INFO - Update id=91152352 is handled. Duration 11020 ms by bot id=7152154137
+2025-02-17 16:28:07 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
+2025-02-17 16:36:06 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
+2025-02-17 16:36:06 - INFO - Update id=91152353 is handled. Duration 11024 ms by bot id=7152154137
