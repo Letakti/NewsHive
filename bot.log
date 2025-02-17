@@ -5826,3 +5826,9 @@ text
 2025-02-17 16:28:07 - ERROR - Ошибка в автоотправке: get_random_news() missing 1 required positional argument: 'user_id'
 2025-02-17 16:36:06 - ERROR - Ошибка при запросе к http://feeds.bbci.co.uk/news/rss.xml: 
 2025-02-17 16:36:06 - INFO - Update id=91152353 is handled. Duration 11024 ms by bot id=7152154137
+2025-02-17 16:39:19 - INFO - Пользователь 1454136738 отправил сообщение: ну САМЫЕ главные новости
+2025-02-17 16:39:19 - INFO - Update id=91152354 is handled. Duration 148 ms by bot id=7152154137
+2025-02-17 16:39:46 - INFO - Пользователь 942801454 отправил сообщение: да нихера не работает нормально
+2025-02-17 16:39:46 - INFO - Update id=91152355 is handled. Duration 150 ms by bot id=7152154137
+2025-02-17 16:40:06 - INFO - Пользователь 1454136738 отправил сообщение: Не понимаю команду 😢
+2025-02-17 16:40:06 - INFO - Update id=91152356 is handled. Duration 155 ms by bot id=7152154137
