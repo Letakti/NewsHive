@@ -102,10 +102,12 @@ async def get_latest_news(user_id: str, source: str, is_category: bool = False) 
 async def send_auto_news(bot: Bot):
     while True:
         try:
-            # Получаем случайную новость
-            news = get_random_news()
+            # Получаем топ-новости через сервисный контекст
+            news = await get_top_news(user_id="auto_broadcast")
             if not news:
-                news = ["📢 Интересных новостей пока нет!"]
+                logger.info("Авторассылка пропущена: список новостей пуст")
+                await asyncio.sleep(3600)
+                continue
             
             # Читаем ID групп из файла
             with open(GROUPS_FILE, "r") as f:
