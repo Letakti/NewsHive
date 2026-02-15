@@ -3,6 +3,7 @@ from aiogram.types import Message, ReplyKeyboardRemove
 from aiogram.filters import Command
 from parser import (
     add_user_source,
+    get_user_sources,
     get_latest_news,
     get_random_news,
     get_top_news,
@@ -16,7 +17,7 @@ from keyboards import (
     sources_menu,
     user_sources_menu,
 )
-from config import NEWS_CATEGORIES, NEWS_SOURCES, GROUPS_FILE
+from config import NEWS_CATEGORIES, GROUPS_FILE
 from logger import logger  # Импортируем логер
 
 from aiogram.filters import ChatMemberUpdatedFilter, IS_NOT_MEMBER, IS_MEMBER
@@ -163,7 +164,9 @@ async def handle_show_user_sources_button(message: Message):
     )
     await message.answer(text)
 
-@router.message(lambda message: message.text in NEWS_SOURCES)
+@router.message(
+    lambda message: message.text in get_user_sources(str(message.from_user.id))
+)
 async def handle_send_source_news(message: Message):
     user_id = str(message.from_user.id)
     source = message.text
@@ -253,4 +256,3 @@ async def on_bot_removed_from_group(event: ChatMemberUpdated):
             if line.strip() != str(chat_id):
                 f.write(line)
     logger.info(f"Бот удален из группы {chat_id}")
-
