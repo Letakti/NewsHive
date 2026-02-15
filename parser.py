@@ -7,8 +7,6 @@ import asyncio
 from logger import logger
 import json
 from config import USER_SOURCES_JSON
-import requests
-from requests.exceptions import Timeout
 
 async def fetch_feed(url: str) -> list:
     """Асинхронно получает и парсит RSS-ленту"""
@@ -104,10 +102,12 @@ async def get_latest_news(user_id: str, source: str, is_category: bool = False) 
 async def send_auto_news(bot: Bot):
     while True:
         try:
-            # Получаем случайную новость
-            news = get_random_news()
+            # Получаем топ-новости через сервисный контекст
+            news = await get_top_news(user_id="auto_broadcast")
             if not news:
-                news = ["📢 Интересных новостей пока нет!"]
+                logger.info("Авторассылка пропущена: список новостей пуст")
+                await asyncio.sleep(3600)
+                continue
             
             # Читаем ID групп из файла
             with open(GROUPS_FILE, "r") as f:
@@ -125,13 +125,6 @@ async def send_auto_news(bot: Bot):
         
         # Ждем 1 час
         await asyncio.sleep(3600)
-
-def save_user_sources(data):
-    try:
-        with open(USER_SOURCES_JSON, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
-    except Exception as e:
-        logger.error(f"Ошибка сохранения источников: {e}")
 
 def remove_user_source(user_id: str, source_name: str):
     """Удаляет источник пользователя"""
