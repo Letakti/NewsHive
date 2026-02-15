@@ -38,8 +38,18 @@ async def manage_sources(message: Message):
 
 @router.message(Command("news"))
 async def random_news(message: Message):
-    news_list = get_random_news(str(message.from_user.id))
-    for news in news_list:
+    news_list = await get_random_news(str(message.from_user.id))
+
+    if not news_list or not isinstance(news_list, list):
+        await message.answer("😢 Не удалось загрузить новости.")
+        return
+
+    valid_news = [news for news in news_list if isinstance(news, str) and news.strip()]
+    if not valid_news:
+        await message.answer("😢 Не удалось загрузить новости.")
+        return
+
+    for news in valid_news:
         await message.answer(news)
 
 @router.message(lambda message: message.text == "⚙️ Управление источниками")
@@ -235,6 +245,4 @@ async def on_bot_removed_from_group(event: ChatMemberUpdated):
             if line.strip() != str(chat_id):
                 f.write(line)
     logger.info(f"Бот удален из группы {chat_id}")
-
-
 
