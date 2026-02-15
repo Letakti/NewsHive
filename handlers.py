@@ -1,17 +1,26 @@
-import asyncio
-from aiogram import Router, Bot, types
+from aiogram import Router
 from aiogram.types import Message, ReplyKeyboardRemove
 from aiogram.filters import Command
-from parser import get_latest_news, get_random_news, add_user_source
-from keyboards import main_menu, sources_menu, categories_menu
-from config import CHAT_ID, AUTO_UPDATE_INTERVAL, NEWS_CATEGORIES, NEWS_SOURCES, GROUPS_FILE
+from parser import (
+    add_user_source,
+    get_latest_news,
+    get_random_news,
+    get_top_news,
+    load_user_sources,
+    remove_user_source,
+)
+from keyboards import (
+    categories_menu,
+    main_menu,
+    manage_sources_menu,
+    sources_menu,
+    user_sources_menu,
+)
+from config import NEWS_CATEGORIES, NEWS_SOURCES, GROUPS_FILE
 from logger import logger  # Импортируем логер
 
 from aiogram.filters import ChatMemberUpdatedFilter, IS_NOT_MEMBER, IS_MEMBER
 from aiogram.types import ChatMemberUpdated
-from parser import get_user_sources, remove_user_source, get_top_news
-from keyboards import main_menu, sources_menu, categories_menu, manage_sources_menu, user_sources_menu  # Добавлен manage_sources_menu
-from parser import get_latest_news, get_random_news, add_user_source, load_user_sources, remove_user_source  # Добавлен load_user_sources
 
 router = Router()
 user_states = {}
@@ -33,22 +42,21 @@ async def help(message: Message):
     await message.answer(text)
 
 @router.message(Command("sources"))
-async def manage_sources(message: Message):
+async def handle_sources_command(message: Message):
     await message.answer("Управление источниками:", reply_markup=manage_sources_menu())
 
 @router.message(Command("news"))
-async def random_news(message: Message):
-    news_list = get_random_news(str(message.from_user.id))
+async def handle_news_command(message: Message):
+    news_list = await get_random_news(str(message.from_user.id))
     for news in news_list:
         await message.answer(news)
 
 @router.message(lambda message: message.text == "⚙️ Управление источниками")
-async def manage_sources(message: Message):
-    user_id = str(message.from_user.id)
+async def handle_sources_button(message: Message):
     await message.answer("Управление источниками:", reply_markup=manage_sources_menu())
 
 @router.message(lambda message: message.text == "📰 Новости по источнику")
-async def choose_news_source(message: Message):
+async def handle_choose_news_source(message: Message):
     logger.info(f"Пользователь {message.from_user.id} выбрал новости по источнику.")
     user_id = str(message.from_user.id)
     await message.answer(
@@ -57,12 +65,12 @@ async def choose_news_source(message: Message):
     )
 
 @router.message(lambda message: message.text == "📂 Новости по категории")
-async def choose_category(message: Message):
+async def handle_choose_category_button(message: Message):
     logger.info(f"Пользователь {message.from_user.id} выбрал новости по категории.")
     await message.answer("Выбери категорию:", reply_markup=categories_menu())
 
 @router.message(lambda message: message.text == "🎲 Рандомные новости")
-async def send_random_news(message: Message):
+async def handle_random_news_button(message: Message):
     user_id = str(message.from_user.id)
     logger.info(f"Пользователь {user_id} запросил случайные новости.")
     news_list = await get_random_news(user_id)  # Добавьте await
@@ -70,7 +78,7 @@ async def send_random_news(message: Message):
         await message.answer(news)
 
 @router.message(lambda message: message.text == "📌 Основные новости")
-async def send_top_news(message: Message):
+async def handle_top_news_button(message: Message):
     user_id = str(message.from_user.id)
     news_list = await get_top_news(user_id)
     
@@ -85,7 +93,7 @@ async def send_top_news(message: Message):
     )
 
 @router.message(lambda message: message.text == "➕ Добавить источник")
-async def ask_for_source_name(message: Message):
+async def handle_add_source_button(message: Message):
     user_id = str(message.from_user.id)
     logger.info(f"Пользователь {user_id} начал добавление источника.")
     user_states[user_id] = "waiting_for_source_name"  # Состояние: ожидание названия
@@ -99,15 +107,15 @@ async def handle_back_during_removal(message: Message):
     await message.answer("Возвращаемся в меню управления:", reply_markup=manage_sources_menu())
 
 @router.message(lambda message: message.text == "🔙 Назад")
-async def go_back(message: Message):
-        logger.info(f"Пользователь {message.from_user.id} нажал кнопку 'Назад'.")
-        user_id = str(message.from_user.id)
-        if user_id in user_states:
-            del user_states[user_id]  # Сбрасываем состояние
-        await message.answer("Возвращаемся в главное меню:", reply_markup=main_menu())
+async def handle_back_button(message: Message):
+    logger.info(f"Пользователь {message.from_user.id} нажал кнопку 'Назад'.")
+    user_id = str(message.from_user.id)
+    if user_id in user_states:
+        del user_states[user_id]  # Сбрасываем состояние
+    await message.answer("Возвращаемся в главное меню:", reply_markup=main_menu())
 
 @router.message(lambda message: message.text == "➖ Удалить источник")
-async def ask_source_to_remove(message: Message):
+async def handle_remove_source_button(message: Message):
     user_id = str(message.from_user.id)
     user_sources = load_user_sources().get(user_id, {})
     
@@ -132,7 +140,7 @@ async def handle_source_removal(message: Message):
     await message.answer(result, reply_markup=manage_sources_menu())
 
 @router.message(lambda message: message.text == "📋 Мои источники")
-async def show_user_sources(message: Message):
+async def handle_show_user_sources_button(message: Message):
     user_id = str(message.from_user.id)
     user_sources = load_user_sources().get(user_id, {})
     
@@ -146,7 +154,7 @@ async def show_user_sources(message: Message):
     await message.answer(text)
 
 @router.message(lambda message: message.text in NEWS_SOURCES)
-async def send_news(message: Message):
+async def handle_send_source_news(message: Message):
     user_id = str(message.from_user.id)
     source = message.text
     logger.info(f"Пользователь {user_id} запросил новости из источника: {source}.")
@@ -161,7 +169,7 @@ async def send_news(message: Message):
         await message.answer(news)  # Теперь news гарантированно строка
 
 @router.message(lambda message: message.text in NEWS_CATEGORIES)
-async def send_category_news(message: Message):
+async def handle_send_category_news(message: Message):
     user_id = str(message.from_user.id)
     category = message.text
     logger.info(f"Пользователь {user_id} запросил новости из категории: {category}.")
@@ -235,6 +243,4 @@ async def on_bot_removed_from_group(event: ChatMemberUpdated):
             if line.strip() != str(chat_id):
                 f.write(line)
     logger.info(f"Бот удален из группы {chat_id}")
-
-
 
