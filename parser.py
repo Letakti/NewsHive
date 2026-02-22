@@ -117,7 +117,12 @@ async def send_auto_news(bot: Bot):
             # Отправляем новость в каждую группу
             for chat_id in group_ids:
                 try:
-                    await bot.send_message(chat_id=chat_id, text=news[0])
+                    await bot.send_message(
+                        chat_id=chat_id,
+                        text=news[0],
+                        parse_mode="HTML",
+                        disable_web_page_preview=True,
+                    )
                 except Exception as e:
                     logger.error(f"Ошибка отправки в группу {chat_id}: {e}")
         
