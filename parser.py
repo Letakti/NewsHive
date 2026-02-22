@@ -14,11 +14,8 @@ from storage.db import (
     get_user_sources_for_user,
     init_db,
     remove_user_source as db_remove_user_source,
-    save_user_preferences as db_save_user_preferences,
+    update_preferences as db_update_preferences,
 )
-
-init_db()
-
 
 DEFAULT_PREFERENCES = {
     "delivery_mode": "stream",
@@ -80,37 +77,35 @@ def _normalize_preferences(raw: dict | None) -> dict:
     }
 
 
-def get_preferences(chat_id: str) -> dict:
-    init_db()
-    return _normalize_preferences(db_get_preferences(str(chat_id)))
+async def get_preferences(chat_id: str) -> dict:
+    await init_db()
+    return _normalize_preferences(await db_get_preferences(str(chat_id)))
 
 
-def update_preferences(chat_id: str, **updates):
-    init_db()
-    current = _normalize_preferences(db_get_preferences(str(chat_id)))
+async def update_preferences(chat_id: str, **updates):
+    await init_db()
+    payload = {}
+    if "quiet_hours_start" in updates:
+        payload["quiet_hours_start"] = int(updates["quiet_hours_start"]) % 24
+    if "quiet_hours_end" in updates:
+        payload["quiet_hours_end"] = int(updates["quiet_hours_end"]) % 24
+    for key in {"delivery_mode", "max_items_per_push", "only_top_news"}:
+        if key in updates:
+            payload[key] = updates[key]
 
-    for key, value in updates.items():
-        if key == "quiet_hours_start":
-            current["quiet_hours"]["start"] = int(value) % 24
-        elif key == "quiet_hours_end":
-            current["quiet_hours"]["end"] = int(value) % 24
-        elif key in {"delivery_mode", "max_items_per_push", "only_top_news"}:
-            current[key] = value
+    updated = await db_update_preferences(str(chat_id), **payload)
+    return _normalize_preferences(updated)
 
-    updated = _normalize_preferences(current)
-    db_save_user_preferences(str(chat_id), updated)
-    return updated
-
-def add_user_source(user_id: str, name: str, url: str):
+async def add_user_source(user_id: str, name: str, url: str):
     """Добавляет источник для конкретного пользователя"""
-    init_db()
-    if not db_add_user_source(user_id, name, url):
+    await init_db()
+    if not await db_add_user_source(user_id, name, url):
         return "⚠️ У вас уже есть такой источник!"
     return f"✅ Источник {name} добавлен в вашу коллекцию!"
 
 async def get_random_news(user_id: str):
     """Возвращает 5 случайных новостей"""
-    all_sources = get_user_sources(user_id)
+    all_sources = await get_user_sources(user_id)
     sources = list(all_sources.values())
     
     tasks = [fetch_feed(url) for url in sources]
@@ -121,10 +116,10 @@ async def get_random_news(user_id: str):
     
     return [f"📰 {news['title']}\n🔗 {news['link']}" for news in random_news]
 
-def get_user_sources(user_id: str):
+async def get_user_sources(user_id: str):
     """Возвращает все источники пользователя (стандартные + свои)"""
-    init_db()
-    user_sources = get_user_sources_for_user(str(user_id))
+    await init_db()
+    user_sources = await get_user_sources_for_user(str(user_id))
     return {**NEWS_SOURCES, **user_sources}  # Объединяем словари
 
 async def get_latest_news(user_id: str, source: str, is_category: bool = False) -> list:
@@ -139,7 +134,7 @@ async def get_latest_news(user_id: str, source: str, is_category: bool = False) 
         all_news = [item for sublist in results for item in sublist]
         return all_news[:5]
     
-    all_sources = get_user_sources(user_id)
+    all_sources = await get_user_sources(user_id)
     url = all_sources.get(source)
     
     if not url:
@@ -186,15 +181,15 @@ def build_digest_message(news_items: list[str]) -> str:
 
 
 async def send_auto_news(bot: Bot):
-    init_db()
+    await init_db()
     while True:
         try:
-            group_ids = get_bot_group_ids()
+            group_ids = await get_bot_group_ids()
             
             # Отправляем новость в каждую группу с учетом настроек
             for chat_id in group_ids:
                 try:
-                    preferences = get_preferences(chat_id)
+                    preferences = await get_preferences(chat_id)
                     if _is_quiet_time(preferences["quiet_hours"]):
                         logger.info(f"Авторассылка для {chat_id} пропущена: тихие часы")
                         continue
@@ -233,10 +228,10 @@ async def send_auto_news(bot: Bot):
         # Ждем 1 час
         await asyncio.sleep(3600)
 
-def remove_user_source(user_id: str, source_name: str):
+async def remove_user_source(user_id: str, source_name: str):
     """Удаляет источник пользователя"""
-    init_db()
-    if not db_remove_user_source(user_id, source_name):
+    await init_db()
+    if not await db_remove_user_source(user_id, source_name):
         return "❌ Этот источник нельзя удалить (он стандартный или отсутствует)"
     return f"✅ Источник '{source_name}' удален!"
 

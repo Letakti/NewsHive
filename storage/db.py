@@ -1,6 +1,9 @@
 import sqlite3
-from contextlib import contextmanager
 from datetime import datetime
+
+import aiosqlite
+
+from logger import logger
 
 DB_PATH = "newshive.db"
 
@@ -9,9 +12,9 @@ def _utc_now() -> str:
     return datetime.utcnow().isoformat(timespec="seconds")
 
 
-def init_db() -> None:
-    with sqlite3.connect(DB_PATH) as conn:
-        conn.execute(
+async def init_db() -> None:
+    async with aiosqlite.connect(DB_PATH) as conn:
+        await conn.execute(
             """
             CREATE TABLE IF NOT EXISTS user_sources (
                 user_id TEXT,
@@ -22,7 +25,7 @@ def init_db() -> None:
             )
             """
         )
-        conn.execute(
+        await conn.execute(
             """
             CREATE TABLE IF NOT EXISTS user_preferences (
                 user_id TEXT PRIMARY KEY,
@@ -35,7 +38,7 @@ def init_db() -> None:
             )
             """
         )
-        conn.execute(
+        await conn.execute(
             """
             CREATE TABLE IF NOT EXISTS bot_groups (
                 chat_id TEXT PRIMARY KEY,
@@ -43,59 +46,83 @@ def init_db() -> None:
             )
             """
         )
+        await conn.commit()
 
 
-@contextmanager
-def get_connection():
-    conn = sqlite3.connect(DB_PATH)
+async def _execute_write(query: str, params: tuple = ()) -> aiosqlite.Cursor:
     try:
-        yield conn
-        conn.commit()
-    finally:
-        conn.close()
+        async with aiosqlite.connect(DB_PATH) as conn:
+            await conn.execute("BEGIN")
+            cursor = await conn.execute(query, params)
+            await conn.commit()
+            return cursor
+    except sqlite3.Error as exc:
+        logger.exception("DB write failed: %s | params=%s", query, params)
+        raise exc
 
 
-def get_user_sources_for_user(user_id: str) -> dict[str, str]:
-    with get_connection() as conn:
-        rows = conn.execute(
+def _log_db_error(query: str, params: tuple, exc: sqlite3.Error) -> None:
+    logger.exception("DB read failed: %s | params=%s | error=%s", query, params, exc)
+
+
+async def get_user_sources_for_user(user_id: str) -> dict[str, str]:
+    query = "SELECT source_name, source_url FROM user_sources WHERE user_id = ? ORDER BY created_at DESC"
+    params = (str(user_id),)
+    try:
+        async with aiosqlite.connect(DB_PATH) as conn:
+            rows = await (
+                await conn.execute(
             "SELECT source_name, source_url FROM user_sources WHERE user_id = ? ORDER BY created_at DESC",
-            (str(user_id),),
-        ).fetchall()
+            params,
+                )
+            ).fetchall()
+    except sqlite3.Error as exc:
+        _log_db_error(query, params, exc)
+        return {}
     return {name: url for name, url in rows}
 
 
-def add_user_source(user_id: str, source_name: str, source_url: str) -> bool:
+async def add_user_source(user_id: str, source_name: str, source_url: str) -> bool:
     try:
-        with get_connection() as conn:
-            conn.execute(
-                """
-                INSERT INTO user_sources (user_id, source_name, source_url, created_at)
-                VALUES (?, ?, ?, ?)
-                """,
-                (str(user_id), source_name, source_url, _utc_now()),
-            )
-        return True
+        cursor = await _execute_write(
+            """
+            INSERT INTO user_sources (user_id, source_name, source_url, created_at)
+            VALUES (?, ?, ?, ?)
+            ON CONFLICT(user_id, source_name) DO NOTHING
+            """,
+            (str(user_id), source_name, source_url, _utc_now()),
+        )
+        return cursor.rowcount > 0
     except sqlite3.IntegrityError:
         return False
 
 
-def remove_user_source(user_id: str, source_name: str) -> bool:
-    with get_connection() as conn:
-        cursor = conn.execute(
+async def remove_user_source(user_id: str, source_name: str) -> bool:
+    cursor = await _execute_write(
             "DELETE FROM user_sources WHERE user_id = ? AND source_name = ?",
             (str(user_id), source_name),
         )
     return cursor.rowcount > 0
 
 
-def load_user_preferences() -> dict[str, dict]:
-    with get_connection() as conn:
-        rows = conn.execute(
-            """
+async def load_user_preferences() -> dict[str, dict]:
+    query = """
             SELECT user_id, delivery_mode, max_items_per_push, only_top_news, quiet_start, quiet_end
             FROM user_preferences
             """
-        ).fetchall()
+    try:
+        async with aiosqlite.connect(DB_PATH) as conn:
+            rows = await (
+                await conn.execute(
+            """
+            SELECT user_id, delivery_mode, max_items_per_push, only_top_news, quiet_start, quiet_end
+            FROM user_preferences
+            """,
+                )
+            ).fetchall()
+    except sqlite3.Error as exc:
+        _log_db_error(query, (), exc)
+        return {}
 
     return {
         user_id: {
@@ -108,16 +135,28 @@ def load_user_preferences() -> dict[str, dict]:
     }
 
 
-def get_preferences(user_id: str) -> dict | None:
-    with get_connection() as conn:
-        row = conn.execute(
+async def get_preferences(user_id: str) -> dict | None:
+    query = """
+            SELECT delivery_mode, max_items_per_push, only_top_news, quiet_start, quiet_end
+            FROM user_preferences
+            WHERE user_id = ?
+            """
+    params = (str(user_id),)
+    try:
+        async with aiosqlite.connect(DB_PATH) as conn:
+            row = await (
+                await conn.execute(
             """
             SELECT delivery_mode, max_items_per_push, only_top_news, quiet_start, quiet_end
             FROM user_preferences
             WHERE user_id = ?
             """,
-            (str(user_id),),
-        ).fetchone()
+            params,
+                )
+            ).fetchone()
+    except sqlite3.Error as exc:
+        _log_db_error(query, params, exc)
+        return None
 
     if not row:
         return None
@@ -131,9 +170,8 @@ def get_preferences(user_id: str) -> dict | None:
     }
 
 
-def save_user_preferences(user_id: str, preferences: dict) -> None:
-    with get_connection() as conn:
-        conn.execute(
+async def save_user_preferences(user_id: str, preferences: dict) -> None:
+    await _execute_write(
             """
             INSERT INTO user_preferences (
                 user_id, delivery_mode, max_items_per_push, only_top_news, quiet_start, quiet_end, updated_at
@@ -158,27 +196,49 @@ def save_user_preferences(user_id: str, preferences: dict) -> None:
         )
 
 
-def update_preferences(user_id: str, **updates) -> dict | None:
-    current = get_preferences(user_id)
-    if current is None:
-        return None
+async def update_preferences(user_id: str, **updates) -> dict | None:
+    delivery_mode = updates.get("delivery_mode")
+    max_items = updates.get("max_items_per_push")
+    only_top = updates.get("only_top_news")
+    quiet_start = updates.get("quiet_hours_start")
+    quiet_end = updates.get("quiet_hours_end")
 
-    if "quiet_hours_start" in updates:
-        current["quiet_hours"]["start"] = updates["quiet_hours_start"]
-    if "quiet_hours_end" in updates:
-        current["quiet_hours"]["end"] = updates["quiet_hours_end"]
+    await _execute_write(
+        """
+        INSERT INTO user_preferences (
+            user_id, delivery_mode, max_items_per_push, only_top_news, quiet_start, quiet_end, updated_at
+        ) VALUES (
+            ?,
+            COALESCE(?, 'stream'),
+            COALESCE(?, 3),
+            COALESCE(?, 1),
+            COALESCE(?, 23),
+            COALESCE(?, 7),
+            ?
+        )
+        ON CONFLICT(user_id) DO UPDATE SET
+            delivery_mode = COALESCE(excluded.delivery_mode, user_preferences.delivery_mode),
+            max_items_per_push = COALESCE(excluded.max_items_per_push, user_preferences.max_items_per_push),
+            only_top_news = COALESCE(excluded.only_top_news, user_preferences.only_top_news),
+            quiet_start = COALESCE(excluded.quiet_start, user_preferences.quiet_start),
+            quiet_end = COALESCE(excluded.quiet_end, user_preferences.quiet_end),
+            updated_at = excluded.updated_at
+        """,
+        (
+            str(user_id),
+            delivery_mode,
+            max_items,
+            int(only_top) if only_top is not None else None,
+            quiet_start,
+            quiet_end,
+            _utc_now(),
+        ),
+    )
+    return await get_preferences(user_id)
 
-    for key in {"delivery_mode", "max_items_per_push", "only_top_news"}:
-        if key in updates:
-            current[key] = updates[key]
 
-    save_user_preferences(user_id, current)
-    return current
-
-
-def add_bot_group(chat_id: str) -> None:
-    with get_connection() as conn:
-        conn.execute(
+async def add_bot_group(chat_id: str) -> None:
+    await _execute_write(
             """
             INSERT INTO bot_groups (chat_id, added_at)
             VALUES (?, ?)
@@ -188,12 +248,16 @@ def add_bot_group(chat_id: str) -> None:
         )
 
 
-def remove_bot_group(chat_id: str) -> None:
-    with get_connection() as conn:
-        conn.execute("DELETE FROM bot_groups WHERE chat_id = ?", (str(chat_id),))
+async def remove_bot_group(chat_id: str) -> None:
+    await _execute_write("DELETE FROM bot_groups WHERE chat_id = ?", (str(chat_id),))
 
 
-def get_bot_group_ids() -> list[str]:
-    with get_connection() as conn:
-        rows = conn.execute("SELECT chat_id FROM bot_groups").fetchall()
+async def get_bot_group_ids() -> list[str]:
+    query = "SELECT chat_id FROM bot_groups"
+    try:
+        async with aiosqlite.connect(DB_PATH) as conn:
+            rows = await (await conn.execute(query)).fetchall()
+    except sqlite3.Error as exc:
+        _log_db_error(query, (), exc)
+        return []
     return [row[0] for row in rows]

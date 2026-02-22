@@ -2,3 +2,4 @@ aiogram
 aiohttp
 feedparser
 requests
+aiosqlite
