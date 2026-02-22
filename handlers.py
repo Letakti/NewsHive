@@ -29,7 +29,7 @@ from keyboards import (
 )
 from config import NEWS_CATEGORIES
 from logger import logger  # Импортируем логер
-from storage.db import add_bot_group, get_user_sources_for_user, init_db, remove_bot_group
+from storage.db import add_bot_group, get_user_sources_for_user, remove_bot_group
 from formatters import format_news_batch
 from uuid import uuid4
 
@@ -113,7 +113,7 @@ async def handle_sources_button(message: Message):
 @router.message(lambda message: message.text == "⚙️ Настройки ленты")
 async def handle_feed_settings_button(message: Message):
     chat_id = str(message.chat.id)
-    preferences = get_preferences(chat_id)
+    preferences = await get_preferences(chat_id)
     text = (
         "⚙️ <b>Настройки ленты</b>\n"
         "Выберите параметр для изменения.\n"
@@ -178,8 +178,7 @@ async def handle_back_button(message: Message, state: FSMContext):
 @router.message(lambda message: message.text == "➖ Удалить источник")
 async def handle_remove_source_button(message: Message, state: FSMContext):
     user_id = str(message.from_user.id)
-    init_db()
-    user_sources = get_user_sources_for_user(user_id)
+    user_sources = await get_user_sources_for_user(user_id)
     
     if not user_sources:
         await message.answer("❌ У вас нет пользовательских источников.")
@@ -194,7 +193,7 @@ async def handle_remove_source_button(message: Message, state: FSMContext):
 async def handle_source_removal(message: Message, state: FSMContext):
     user_id = str(message.from_user.id)
     source_name = message.text
-    result = remove_user_source(user_id, source_name)
+    result = await remove_user_source(user_id, source_name)
 
     await state.clear()
     await message.answer(result, reply_markup=manage_sources_menu())
@@ -216,7 +215,7 @@ async def handle_source_url_input(message: Message, state: FSMContext):
     data = await state.get_data()
     source_name = data.get("source_name")
     url = message.text
-    result = add_user_source(user_id, source_name, url)
+    result = await add_user_source(user_id, source_name, url)
     await state.clear()
     await message.answer(result, reply_markup=sources_menu(user_id))
     await message.answer(result, reply_markup=main_menu())
@@ -224,8 +223,7 @@ async def handle_source_url_input(message: Message, state: FSMContext):
 @router.message(lambda message: message.text == "📋 Мои источники")
 async def handle_show_user_sources_button(message: Message):
     user_id = str(message.from_user.id)
-    init_db()
-    user_sources = get_user_sources_for_user(user_id)
+    user_sources = await get_user_sources_for_user(user_id)
     
     if not user_sources:
         await message.answer("📭 У вас пока нет своих источников.")
@@ -236,9 +234,12 @@ async def handle_show_user_sources_button(message: Message):
     )
     await message.answer(text)
 
-@router.message(
-    lambda message: message.text in get_user_sources(str(message.from_user.id))
-)
+async def _is_user_source_message(message: Message) -> bool:
+    sources = await get_user_sources(str(message.from_user.id))
+    return message.text in sources
+
+
+@router.message(_is_user_source_message)
 async def handle_send_source_news(message: Message):
     user_id = str(message.from_user.id)
     source = message.text
@@ -305,24 +306,24 @@ async def handle_news_pagination(callback: CallbackQuery):
 async def handle_feed_preferences(callback: CallbackQuery):
     action = callback.data.split(":", 1)[1]
     chat_id = str(callback.message.chat.id)
-    current = get_preferences(chat_id)
+    current = await get_preferences(chat_id)
 
     if action == "toggle_delivery":
         new_mode = "digest" if current["delivery_mode"] == "stream" else "stream"
-        update_preferences(chat_id, delivery_mode=new_mode)
+        await update_preferences(chat_id, delivery_mode=new_mode)
     elif action == "cycle_max":
         next_value = current["max_items_per_push"] + 1
         if next_value > 10:
             next_value = 1
-        update_preferences(chat_id, max_items_per_push=next_value)
+        await update_preferences(chat_id, max_items_per_push=next_value)
     elif action == "toggle_top":
-        update_preferences(chat_id, only_top_news=not current["only_top_news"])
+        await update_preferences(chat_id, only_top_news=not current["only_top_news"])
     elif action == "quiet_start":
-        update_preferences(chat_id, quiet_hours_start=current["quiet_hours"]["start"] + 1)
+        await update_preferences(chat_id, quiet_hours_start=current["quiet_hours"]["start"] + 1)
     elif action == "quiet_end":
-        update_preferences(chat_id, quiet_hours_end=current["quiet_hours"]["end"] + 1)
+        await update_preferences(chat_id, quiet_hours_end=current["quiet_hours"]["end"] + 1)
 
-    updated = get_preferences(chat_id)
+    updated = await get_preferences(chat_id)
     await callback.message.edit_reply_markup(reply_markup=feed_settings_menu(updated))
     await callback.answer("Сохранено")
 
@@ -339,7 +340,7 @@ async def handle_custom_source(message: Message):
     await message.answer("Не понимаю команду 😢")
     if user_states.get(user_id) == "waiting_source_to_remove":
         source_name = message.text
-        result = remove_user_source(user_id, source_name)
+        result = await remove_user_source(user_id, source_name)
         del user_states[user_id]
         await message.answer(result, reply_markup=manage_sources_menu())
         return
@@ -355,7 +356,7 @@ async def handle_custom_source(message: Message):
         # Пользователь ввел ссылку → сохраняем источник
         source_name = user_states[user_id]["source_name"]
         url = message.text
-        result = add_user_source(user_id, source_name, url)
+        result = await add_user_source(user_id, source_name, url)
 
         if "✅" in result:
             del user_states[user_id]  # Удаляем состояние только при успешном добавлении
@@ -372,14 +373,12 @@ async def handle_custom_source(message: Message):
 async def on_bot_added_to_group(event: ChatMemberUpdated):
     """Обработчик добавления бота в группу"""
     chat_id = str(event.chat.id)
-    init_db()
-    add_bot_group(chat_id)
+    await add_bot_group(chat_id)
     logger.info(f"Бот добавлен в группу {chat_id}")
 
 @router.chat_member(ChatMemberUpdatedFilter(IS_MEMBER >> IS_NOT_MEMBER))
 async def on_bot_removed_from_group(event: ChatMemberUpdated):
     """Обработчик удаления бота из группы"""
     chat_id = str(event.chat.id)
-    init_db()
-    remove_bot_group(chat_id)
+    await remove_bot_group(chat_id)
     logger.info(f"Бот удален из группы {chat_id}")
