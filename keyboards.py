@@ -1,6 +1,6 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from config import NEWS_SOURCES, NEWS_CATEGORIES
-from parser import get_user_sources, load_user_sources
+from parser import get_custom_user_sources, get_user_sources
 
 def main_menu():
     """Главное меню"""
@@ -29,9 +29,9 @@ def feed_settings_menu(preferences: dict):
         ]
     )
 
-def sources_menu(user_id: str):
+async def sources_menu(user_id: str):
     """Кнопки выбора источников"""
-    all_sources = get_user_sources(user_id)  # Получаем ВСЕ источники
+    all_sources = await get_user_sources(user_id)  # Получаем ВСЕ источники
     sources = list(all_sources.keys())       # Названия источников
     buttons = []
     
@@ -68,9 +68,9 @@ def manage_sources_menu():
         [KeyboardButton(text="🔙 Назад")]
     ], resize_keyboard=True)
 
-def user_sources_menu(user_id: str):
+async def user_sources_menu(user_id: str):
     """Меню только пользовательских источников для удаления"""
-    user_sources = load_user_sources().get(user_id, {})
+    user_sources = await get_custom_user_sources(user_id)
     sources = list(user_sources.keys())
     
     buttons = []

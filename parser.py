@@ -122,6 +122,12 @@ async def get_user_sources(user_id: str):
     user_sources = await get_user_sources_for_user(str(user_id))
     return {**NEWS_SOURCES, **user_sources}  # Объединяем словари
 
+
+async def get_custom_user_sources(user_id: str) -> dict:
+    """Возвращает только пользовательские источники (без стандартных)."""
+    await init_db()
+    return await get_user_sources_for_user(str(user_id))
+
 async def get_latest_news(user_id: str, source: str, is_category: bool = False) -> list:
     """Возвращает новости в виде строк (работает с источниками и категориями)"""
     if is_category:
