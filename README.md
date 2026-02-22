@@ -132,6 +132,25 @@ python scripts/migrate_file_storage_to_db.py
 
 Проект отказался от JSON/TXT-хранилищ (`user_sources.json`, `user_preferences.json`, `groups.txt`) в пользу SQLite для большей консистентности и безопасной конкурентной записи.
 
+
+## Защита от двойного старта polling
+
+- В `bot.py` добавлен lock-файл (`/tmp/newshive_polling.lock`, переопределяется через `POLLING_LOCK_PATH`).
+- Если lock не получен, процесс пишет ошибку в лог и сразу завершается — второй polling-процесс не стартует.
+- Перед `start_polling` бот принудительно вызывает `delete_webhook(drop_pending_updates=True)`, чтобы не смешивать webhook/polling режимы.
+- Токен дополнительно верифицируется через `get_me()`: ожидается бот `@newshiverubot`.
+
+### Проверки окружения (docker-compose / k8s)
+
+- Для `docker-compose` сервис polling должен быть в единственном экземпляре (`deploy.replicas: 1` и без `--scale polling>1`).
+- Для Kubernetes у deployment polling укажите `spec.replicas: 1`.
+- Перед деплоем проверьте, что нет старого процесса/контейнера:
+
+```bash
+docker compose ps
+ps aux | rg "python bot.py"
+```
+
 ---
 
 Автор: Letakti

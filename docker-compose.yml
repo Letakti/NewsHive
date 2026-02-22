@@ -1,0 +1,11 @@
+services:
+  polling:
+    build: .
+    container_name: newshive-polling
+    command: python bot.py
+    restart: unless-stopped
+    environment:
+      TOKEN: ${TOKEN}
+      POLLING_LOCK_PATH: /tmp/newshive_polling.lock
+    deploy:
+      replicas: 1
