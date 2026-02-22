@@ -1,7 +1,7 @@
 import asyncio
 import sqlite3
 from datetime import datetime
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 
 import aiosqlite
 
@@ -17,10 +17,20 @@ from logger import logger
 
 def _resolve_db_path() -> str:
     if DATABASE_URL:
-        parsed = urlparse(DATABASE_URL)
-        if parsed.scheme and parsed.scheme != "sqlite":
+        if not DATABASE_URL.startswith("sqlite://"):
             raise ValueError("Only sqlite DATABASE_URL is supported, for example sqlite:///newshive.db")
-        return parsed.path.lstrip("/") if parsed.path else SQLITE_PATH
+        parsed = urlparse(DATABASE_URL)
+        if parsed.scheme != "sqlite":
+            raise ValueError("Only sqlite DATABASE_URL is supported, for example sqlite:///newshive.db")
+        if not parsed.path:
+            return SQLITE_PATH
+
+        decoded_path = unquote(parsed.path)
+        if decoded_path.startswith("//"):
+            return decoded_path[1:]
+        if decoded_path.startswith("/"):
+            return decoded_path[1:]
+        return decoded_path
     return SQLITE_PATH
 
 
