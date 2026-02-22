@@ -1,61 +1,89 @@
+import asyncio
 import sqlite3
 from datetime import datetime
+from urllib.parse import urlparse
 
 import aiosqlite
 
+from config import (
+    DATABASE_URL,
+    DB_BUSY_TIMEOUT_MS,
+    DB_CONNECT_TIMEOUT_SECONDS,
+    DB_POOL_SIZE,
+    SQLITE_PATH,
+)
 from logger import logger
 
-DB_PATH = "newshive.db"
+
+def _resolve_db_path() -> str:
+    if DATABASE_URL:
+        parsed = urlparse(DATABASE_URL)
+        if parsed.scheme and parsed.scheme != "sqlite":
+            raise ValueError("Only sqlite DATABASE_URL is supported, for example sqlite:///newshive.db")
+        return parsed.path.lstrip("/") if parsed.path else SQLITE_PATH
+    return SQLITE_PATH
+
+
+DB_PATH = _resolve_db_path()
+_DB_SEMAPHORE = asyncio.Semaphore(max(1, DB_POOL_SIZE))
 
 
 def _utc_now() -> str:
     return datetime.utcnow().isoformat(timespec="seconds")
 
 
+async def _connect() -> aiosqlite.Connection:
+    conn = await aiosqlite.connect(DB_PATH, timeout=DB_CONNECT_TIMEOUT_SECONDS)
+    await conn.execute(f"PRAGMA busy_timeout = {DB_BUSY_TIMEOUT_MS}")
+    return conn
+
+
 async def init_db() -> None:
-    async with aiosqlite.connect(DB_PATH) as conn:
-        await conn.execute(
-            """
-            CREATE TABLE IF NOT EXISTS user_sources (
-                user_id TEXT,
-                source_name TEXT,
-                source_url TEXT,
-                created_at TIMESTAMP,
-                UNIQUE(user_id, source_name)
+    async with _DB_SEMAPHORE:
+        async with await _connect() as conn:
+            await conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS user_sources (
+                    user_id TEXT,
+                    source_name TEXT,
+                    source_url TEXT,
+                    created_at TIMESTAMP,
+                    UNIQUE(user_id, source_name)
+                )
+                """
             )
-            """
-        )
-        await conn.execute(
-            """
-            CREATE TABLE IF NOT EXISTS user_preferences (
-                user_id TEXT PRIMARY KEY,
-                delivery_mode TEXT,
-                max_items_per_push INTEGER,
-                only_top_news BOOLEAN,
-                quiet_start INTEGER,
-                quiet_end INTEGER,
-                updated_at TIMESTAMP
+            await conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS user_preferences (
+                    user_id TEXT PRIMARY KEY,
+                    delivery_mode TEXT,
+                    max_items_per_push INTEGER,
+                    only_top_news BOOLEAN,
+                    quiet_start INTEGER,
+                    quiet_end INTEGER,
+                    updated_at TIMESTAMP
+                )
+                """
             )
-            """
-        )
-        await conn.execute(
-            """
-            CREATE TABLE IF NOT EXISTS bot_groups (
-                chat_id TEXT PRIMARY KEY,
-                added_at TIMESTAMP
+            await conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS bot_groups (
+                    chat_id TEXT PRIMARY KEY,
+                    added_at TIMESTAMP
+                )
+                """
             )
-            """
-        )
-        await conn.commit()
+            await conn.commit()
 
 
 async def _execute_write(query: str, params: tuple = ()) -> aiosqlite.Cursor:
     try:
-        async with aiosqlite.connect(DB_PATH) as conn:
-            await conn.execute("BEGIN")
-            cursor = await conn.execute(query, params)
-            await conn.commit()
-            return cursor
+        async with _DB_SEMAPHORE:
+            async with await _connect() as conn:
+                await conn.execute("BEGIN")
+                cursor = await conn.execute(query, params)
+                await conn.commit()
+                return cursor
     except sqlite3.Error as exc:
         logger.exception("DB write failed: %s | params=%s", query, params)
         raise exc
@@ -69,13 +97,14 @@ async def get_user_sources_for_user(user_id: str) -> dict[str, str]:
     query = "SELECT source_name, source_url FROM user_sources WHERE user_id = ? ORDER BY created_at DESC"
     params = (str(user_id),)
     try:
-        async with aiosqlite.connect(DB_PATH) as conn:
-            rows = await (
-                await conn.execute(
-            "SELECT source_name, source_url FROM user_sources WHERE user_id = ? ORDER BY created_at DESC",
-            params,
-                )
-            ).fetchall()
+        async with _DB_SEMAPHORE:
+            async with await _connect() as conn:
+                rows = await (
+                    await conn.execute(
+                        "SELECT source_name, source_url FROM user_sources WHERE user_id = ? ORDER BY created_at DESC",
+                        params,
+                    )
+                ).fetchall()
     except sqlite3.Error as exc:
         _log_db_error(query, params, exc)
         return {}
@@ -99,9 +128,9 @@ async def add_user_source(user_id: str, source_name: str, source_url: str) -> bo
 
 async def remove_user_source(user_id: str, source_name: str) -> bool:
     cursor = await _execute_write(
-            "DELETE FROM user_sources WHERE user_id = ? AND source_name = ?",
-            (str(user_id), source_name),
-        )
+        "DELETE FROM user_sources WHERE user_id = ? AND source_name = ?",
+        (str(user_id), source_name),
+    )
     return cursor.rowcount > 0
 
 
@@ -111,15 +140,16 @@ async def load_user_preferences() -> dict[str, dict]:
             FROM user_preferences
             """
     try:
-        async with aiosqlite.connect(DB_PATH) as conn:
-            rows = await (
-                await conn.execute(
-            """
-            SELECT user_id, delivery_mode, max_items_per_push, only_top_news, quiet_start, quiet_end
-            FROM user_preferences
-            """,
-                )
-            ).fetchall()
+        async with _DB_SEMAPHORE:
+            async with await _connect() as conn:
+                rows = await (
+                    await conn.execute(
+                        """
+                        SELECT user_id, delivery_mode, max_items_per_push, only_top_news, quiet_start, quiet_end
+                        FROM user_preferences
+                        """,
+                    )
+                ).fetchall()
     except sqlite3.Error as exc:
         _log_db_error(query, (), exc)
         return {}
@@ -143,17 +173,18 @@ async def get_preferences(user_id: str) -> dict | None:
             """
     params = (str(user_id),)
     try:
-        async with aiosqlite.connect(DB_PATH) as conn:
-            row = await (
-                await conn.execute(
-            """
-            SELECT delivery_mode, max_items_per_push, only_top_news, quiet_start, quiet_end
-            FROM user_preferences
-            WHERE user_id = ?
-            """,
-            params,
-                )
-            ).fetchone()
+        async with _DB_SEMAPHORE:
+            async with await _connect() as conn:
+                row = await (
+                    await conn.execute(
+                        """
+                        SELECT delivery_mode, max_items_per_push, only_top_news, quiet_start, quiet_end
+                        FROM user_preferences
+                        WHERE user_id = ?
+                        """,
+                        params,
+                    )
+                ).fetchone()
     except sqlite3.Error as exc:
         _log_db_error(query, params, exc)
         return None
@@ -172,28 +203,28 @@ async def get_preferences(user_id: str) -> dict | None:
 
 async def save_user_preferences(user_id: str, preferences: dict) -> None:
     await _execute_write(
-            """
-            INSERT INTO user_preferences (
-                user_id, delivery_mode, max_items_per_push, only_top_news, quiet_start, quiet_end, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT(user_id) DO UPDATE SET
-                delivery_mode = excluded.delivery_mode,
-                max_items_per_push = excluded.max_items_per_push,
-                only_top_news = excluded.only_top_news,
-                quiet_start = excluded.quiet_start,
-                quiet_end = excluded.quiet_end,
-                updated_at = excluded.updated_at
-            """,
-            (
-                str(user_id),
-                preferences["delivery_mode"],
-                preferences["max_items_per_push"],
-                int(preferences["only_top_news"]),
-                preferences["quiet_hours"]["start"],
-                preferences["quiet_hours"]["end"],
-                _utc_now(),
-            ),
-        )
+        """
+        INSERT INTO user_preferences (
+            user_id, delivery_mode, max_items_per_push, only_top_news, quiet_start, quiet_end, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(user_id) DO UPDATE SET
+            delivery_mode = excluded.delivery_mode,
+            max_items_per_push = excluded.max_items_per_push,
+            only_top_news = excluded.only_top_news,
+            quiet_start = excluded.quiet_start,
+            quiet_end = excluded.quiet_end,
+            updated_at = excluded.updated_at
+        """,
+        (
+            str(user_id),
+            preferences["delivery_mode"],
+            preferences["max_items_per_push"],
+            int(preferences["only_top_news"]),
+            preferences["quiet_hours"]["start"],
+            preferences["quiet_hours"]["end"],
+            _utc_now(),
+        ),
+    )
 
 
 async def update_preferences(user_id: str, **updates) -> dict | None:
@@ -239,13 +270,13 @@ async def update_preferences(user_id: str, **updates) -> dict | None:
 
 async def add_bot_group(chat_id: str) -> None:
     await _execute_write(
-            """
-            INSERT INTO bot_groups (chat_id, added_at)
-            VALUES (?, ?)
-            ON CONFLICT(chat_id) DO NOTHING
-            """,
-            (str(chat_id), _utc_now()),
-        )
+        """
+        INSERT INTO bot_groups (chat_id, added_at)
+        VALUES (?, ?)
+        ON CONFLICT(chat_id) DO NOTHING
+        """,
+        (str(chat_id), _utc_now()),
+    )
 
 
 async def remove_bot_group(chat_id: str) -> None:
@@ -255,8 +286,9 @@ async def remove_bot_group(chat_id: str) -> None:
 async def get_bot_group_ids() -> list[str]:
     query = "SELECT chat_id FROM bot_groups"
     try:
-        async with aiosqlite.connect(DB_PATH) as conn:
-            rows = await (await conn.execute(query)).fetchall()
+        async with _DB_SEMAPHORE:
+            async with await _connect() as conn:
+                rows = await (await conn.execute(query)).fetchall()
     except sqlite3.Error as exc:
         _log_db_error(query, (), exc)
         return []
