@@ -1,18 +1,37 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from config import NEWS_SOURCES, NEWS_CATEGORIES
-from parser import get_user_sources, load_user_sources
+from parser import get_custom_user_sources, get_user_sources
 
 def main_menu():
     """Главное меню"""
     return ReplyKeyboardMarkup(keyboard=[
         [KeyboardButton(text="📰 Новости по источнику"), KeyboardButton(text="📂 Новости по категории")],
         [KeyboardButton(text="🎲 Рандомные новости"), KeyboardButton(text="📌 Основные новости")],
-        [KeyboardButton(text="⚙️ Управление источниками")]
+        [KeyboardButton(text="⚙️ Управление источниками")],
+        [KeyboardButton(text="⚙️ Настройки ленты")]
     ], resize_keyboard=True)
 
-def sources_menu(user_id: str):
+
+def feed_settings_menu(preferences: dict):
+    delivery_mode = "Поток" if preferences["delivery_mode"] == "stream" else "Дайджест"
+    top_only = "Да" if preferences["only_top_news"] else "Нет"
+    quiet_hours = preferences["quiet_hours"]
+
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text=f"Режим доставки: {delivery_mode}", callback_data="prefs:toggle_delivery")],
+            [InlineKeyboardButton(text=f"Макс. новостей: {preferences['max_items_per_push']}", callback_data="prefs:cycle_max")],
+            [InlineKeyboardButton(text=f"Только топ-новости: {top_only}", callback_data="prefs:toggle_top")],
+            [
+                InlineKeyboardButton(text=f"Тихий старт: {quiet_hours['start']:02d}:00", callback_data="prefs:quiet_start"),
+                InlineKeyboardButton(text=f"Тихий конец: {quiet_hours['end']:02d}:00", callback_data="prefs:quiet_end"),
+            ],
+        ]
+    )
+
+async def sources_menu(user_id: str):
     """Кнопки выбора источников"""
-    all_sources = get_user_sources(user_id)  # Получаем ВСЕ источники
+    all_sources = await get_user_sources(user_id)  # Получаем ВСЕ источники
     sources = list(all_sources.keys())       # Названия источников
     buttons = []
     
@@ -49,9 +68,9 @@ def manage_sources_menu():
         [KeyboardButton(text="🔙 Назад")]
     ], resize_keyboard=True)
 
-def user_sources_menu(user_id: str):
+async def user_sources_menu(user_id: str):
     """Меню только пользовательских источников для удаления"""
-    user_sources = load_user_sources().get(user_id, {})
+    user_sources = await get_custom_user_sources(user_id)
     sources = list(user_sources.keys())
     
     buttons = []
