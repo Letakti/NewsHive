@@ -195,6 +195,12 @@ async def send_auto_news(bot: Bot):
             # Отправляем новость в каждую группу с учетом настроек
             for chat_id in group_ids:
                 try:
+                    await bot.send_message(
+                        chat_id=chat_id,
+                        text=news[0],
+                        parse_mode="HTML",
+                        disable_web_page_preview=True,
+                    )
                     preferences = await get_preferences(chat_id)
                     if _is_quiet_time(preferences["quiet_hours"]):
                         logger.info(f"Авторассылка для {chat_id} пропущена: тихие часы")
