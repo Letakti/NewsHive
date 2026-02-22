@@ -224,9 +224,12 @@ async def handle_custom_source(message: Message):
         source_name = user_states[user_id]["source_name"]
         url = message.text
         result = add_user_source(user_id, source_name, url)
-        await message.answer(result, reply_markup=sources_menu(user_id))
-        del user_states[user_id]  # Удаляем состояние
-        await message.answer(result, reply_markup=main_menu())
+
+        if "✅" in result:
+            del user_states[user_id]  # Удаляем состояние только при успешном добавлении
+            await message.answer(result, reply_markup=sources_menu(user_id))
+        else:
+            await message.answer(result, reply_markup=main_menu())
     
     else:
         # Если сообщение не обработано другими обработчиками
