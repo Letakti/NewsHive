@@ -35,6 +35,7 @@ from uuid import uuid4
 
 from aiogram.filters import ChatMemberUpdatedFilter, IS_NOT_MEMBER, IS_MEMBER
 from aiogram.types import ChatMemberUpdated
+from urllib.parse import urlparse
 
 router = Router()
 
@@ -73,6 +74,14 @@ async def _send_news_batch(message: Message, user_id: str, news_list: list[str],
     text = format_news_batch(first_batch, start_index=1, title=title)
     keyboard = _build_news_keyboard(session_id, page=0, total_items=len(valid_news))
     await message.answer(text, parse_mode="HTML", disable_web_page_preview=True, reply_markup=keyboard)
+
+
+def is_http_url(message: Message) -> bool:
+    text = (message.text or "").strip()
+    if not text:
+        return False
+    parsed = urlparse(text)
+    return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
 
 
 class SourceForm(StatesGroup):
@@ -208,7 +217,7 @@ async def handle_source_name_input(message: Message, state: FSMContext):
     await message.answer("Теперь отправьте ссылку на RSS-ленту:")
 
 
-@router.message(StateFilter(SourceForm.waiting_for_source_url))
+@router.message(StateFilter(SourceForm.waiting_for_source_url), is_http_url)
 async def handle_source_url_input(message: Message, state: FSMContext):
     user_id = str(message.from_user.id)
     logger.info(f"Пользователь {user_id} ввел ссылку: {message.text}")
