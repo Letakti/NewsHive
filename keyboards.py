@@ -1,4 +1,4 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from config import NEWS_SOURCES, NEWS_CATEGORIES
 from parser import get_user_sources, load_user_sources
 
@@ -7,8 +7,27 @@ def main_menu():
     return ReplyKeyboardMarkup(keyboard=[
         [KeyboardButton(text="📰 Новости по источнику"), KeyboardButton(text="📂 Новости по категории")],
         [KeyboardButton(text="🎲 Рандомные новости"), KeyboardButton(text="📌 Основные новости")],
-        [KeyboardButton(text="⚙️ Управление источниками")]
+        [KeyboardButton(text="⚙️ Управление источниками")],
+        [KeyboardButton(text="⚙️ Настройки ленты")]
     ], resize_keyboard=True)
+
+
+def feed_settings_menu(preferences: dict):
+    delivery_mode = "Поток" if preferences["delivery_mode"] == "stream" else "Дайджест"
+    top_only = "Да" if preferences["only_top_news"] else "Нет"
+    quiet_hours = preferences["quiet_hours"]
+
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text=f"Режим доставки: {delivery_mode}", callback_data="prefs:toggle_delivery")],
+            [InlineKeyboardButton(text=f"Макс. новостей: {preferences['max_items_per_push']}", callback_data="prefs:cycle_max")],
+            [InlineKeyboardButton(text=f"Только топ-новости: {top_only}", callback_data="prefs:toggle_top")],
+            [
+                InlineKeyboardButton(text=f"Тихий старт: {quiet_hours['start']:02d}:00", callback_data="prefs:quiet_start"),
+                InlineKeyboardButton(text=f"Тихий конец: {quiet_hours['end']:02d}:00", callback_data="prefs:quiet_end"),
+            ],
+        ]
+    )
 
 def sources_menu(user_id: str):
     """Кнопки выбора источников"""

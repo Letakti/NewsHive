@@ -27,6 +27,7 @@ GROUPS_FILE = "groups.txt"  # Файл для хранения ID групп
 
 # Храним пользовательские источники в файле
 USER_SOURCES_JSON = "user_sources.json"
+USER_PREFERENCES_JSON = "user_preferences.json"
 
 # Интервал автообновления (в секундах)
 AUTO_UPDATE_INTERVAL = 6 * 60 * 60  # Каждые 6 часов

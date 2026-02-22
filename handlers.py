@@ -11,15 +11,18 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from parser import (
     add_user_source,
+    get_preferences,
     get_user_sources,
     get_latest_news,
     get_random_news,
     get_top_news,
     load_user_sources,
     remove_user_source,
+    update_preferences,
 )
 from keyboards import (
     categories_menu,
+    feed_settings_menu,
     main_menu,
     manage_sources_menu,
     sources_menu,
@@ -105,6 +108,18 @@ async def random_news(message: Message):
 @router.message(lambda message: message.text == "⚙️ Управление источниками")
 async def handle_sources_button(message: Message):
     await message.answer("Управление источниками:", reply_markup=manage_sources_menu())
+
+
+@router.message(lambda message: message.text == "⚙️ Настройки ленты")
+async def handle_feed_settings_button(message: Message):
+    chat_id = str(message.chat.id)
+    preferences = get_preferences(chat_id)
+    text = (
+        "⚙️ <b>Настройки ленты</b>\n"
+        "Выберите параметр для изменения.\n"
+        "Эти настройки применяются к текущему чату."
+    )
+    await message.answer(text, parse_mode="HTML", reply_markup=feed_settings_menu(preferences))
 
 @router.message(lambda message: message.text == "📰 Новости по источнику")
 async def handle_choose_news_source(message: Message):
@@ -282,6 +297,32 @@ async def handle_news_pagination(callback: CallbackQuery):
     keyboard = _build_news_keyboard(session_id, page=page, total_items=total_items)
     await callback.message.edit_text(text, parse_mode="HTML", disable_web_page_preview=True, reply_markup=keyboard)
     await callback.answer()
+
+
+@router.callback_query(lambda c: c.data and c.data.startswith("prefs:"))
+async def handle_feed_preferences(callback: CallbackQuery):
+    action = callback.data.split(":", 1)[1]
+    chat_id = str(callback.message.chat.id)
+    current = get_preferences(chat_id)
+
+    if action == "toggle_delivery":
+        new_mode = "digest" if current["delivery_mode"] == "stream" else "stream"
+        update_preferences(chat_id, delivery_mode=new_mode)
+    elif action == "cycle_max":
+        next_value = current["max_items_per_push"] + 1
+        if next_value > 10:
+            next_value = 1
+        update_preferences(chat_id, max_items_per_push=next_value)
+    elif action == "toggle_top":
+        update_preferences(chat_id, only_top_news=not current["only_top_news"])
+    elif action == "quiet_start":
+        update_preferences(chat_id, quiet_hours_start=current["quiet_hours"]["start"] + 1)
+    elif action == "quiet_end":
+        update_preferences(chat_id, quiet_hours_end=current["quiet_hours"]["end"] + 1)
+
+    updated = get_preferences(chat_id)
+    await callback.message.edit_reply_markup(reply_markup=feed_settings_menu(updated))
+    await callback.answer("Сохранено")
 
 
 @router.message()
