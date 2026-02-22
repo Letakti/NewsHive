@@ -16,7 +16,6 @@ from parser import (
     get_latest_news,
     get_random_news,
     get_top_news,
-    load_user_sources,
     remove_user_source,
     update_preferences,
 )
@@ -28,8 +27,9 @@ from keyboards import (
     sources_menu,
     user_sources_menu,
 )
-from config import NEWS_CATEGORIES, GROUPS_FILE
+from config import NEWS_CATEGORIES
 from logger import logger  # Импортируем логер
+from storage.db import add_bot_group, get_user_sources_for_user, init_db, remove_bot_group
 from formatters import format_news_batch
 from uuid import uuid4
 
@@ -178,7 +178,8 @@ async def handle_back_button(message: Message, state: FSMContext):
 @router.message(lambda message: message.text == "➖ Удалить источник")
 async def handle_remove_source_button(message: Message, state: FSMContext):
     user_id = str(message.from_user.id)
-    user_sources = load_user_sources().get(user_id, {})
+    init_db()
+    user_sources = get_user_sources_for_user(user_id)
     
     if not user_sources:
         await message.answer("❌ У вас нет пользовательских источников.")
@@ -223,7 +224,8 @@ async def handle_source_url_input(message: Message, state: FSMContext):
 @router.message(lambda message: message.text == "📋 Мои источники")
 async def handle_show_user_sources_button(message: Message):
     user_id = str(message.from_user.id)
-    user_sources = load_user_sources().get(user_id, {})
+    init_db()
+    user_sources = get_user_sources_for_user(user_id)
     
     if not user_sources:
         await message.answer("📭 У вас пока нет своих источников.")
@@ -369,23 +371,15 @@ async def handle_custom_source(message: Message):
 @router.chat_member(ChatMemberUpdatedFilter(IS_NOT_MEMBER >> IS_MEMBER))
 async def on_bot_added_to_group(event: ChatMemberUpdated):
     """Обработчик добавления бота в группу"""
-    chat_id = event.chat.id
-    with open(GROUPS_FILE, "a+") as f:
-        f.seek(0)
-        existing_ids = f.read().splitlines()
-        if str(chat_id) not in existing_ids:
-            f.write(f"{chat_id}\n")
-            logger.info(f"Бот добавлен в группу {chat_id}")
+    chat_id = str(event.chat.id)
+    init_db()
+    add_bot_group(chat_id)
+    logger.info(f"Бот добавлен в группу {chat_id}")
 
 @router.chat_member(ChatMemberUpdatedFilter(IS_MEMBER >> IS_NOT_MEMBER))
 async def on_bot_removed_from_group(event: ChatMemberUpdated):
     """Обработчик удаления бота из группы"""
-    chat_id = event.chat.id
-    with open(GROUPS_FILE, "r+") as f:
-        lines = f.readlines()
-        f.seek(0)
-        f.truncate()
-        for line in lines:
-            if line.strip() != str(chat_id):
-                f.write(line)
+    chat_id = str(event.chat.id)
+    init_db()
+    remove_bot_group(chat_id)
     logger.info(f"Бот удален из группы {chat_id}")

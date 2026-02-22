@@ -3,12 +3,21 @@ import feedparser
 import random
 import html
 from datetime import datetime
-from config import NEWS_SOURCES, NEWS_CATEGORIES, GROUPS_FILE
+from config import NEWS_SOURCES, NEWS_CATEGORIES
 from aiogram import Bot
 import asyncio
 from logger import logger
-import json
-from config import USER_SOURCES_JSON, USER_PREFERENCES_JSON
+from storage.db import (
+    add_user_source as db_add_user_source,
+    get_bot_group_ids,
+    get_preferences as db_get_preferences,
+    get_user_sources_for_user,
+    init_db,
+    remove_user_source as db_remove_user_source,
+    save_user_preferences as db_save_user_preferences,
+)
+
+init_db()
 
 
 DEFAULT_PREFERENCES = {
@@ -41,20 +50,6 @@ async def fetch_feed(url: str) -> list:
         logger.error(f"Ошибка при запросе к {url}: {str(e)}")
         return []
 
-def load_user_sources():
-    """Загружает источники из JSON-файла"""
-    try:
-        with open(USER_SOURCES_JSON, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return {}
-
-def save_user_sources(data):
-    """Сохраняет источники в JSON-файл"""
-    with open(USER_SOURCES_JSON, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
-
-
 def _normalize_preferences(raw: dict | None) -> dict:
     data = raw or {}
     quiet_hours = data.get("quiet_hours") if isinstance(data.get("quiet_hours"), dict) else {}
@@ -85,30 +80,14 @@ def _normalize_preferences(raw: dict | None) -> dict:
     }
 
 
-def load_user_preferences() -> dict:
-    try:
-        with open(USER_PREFERENCES_JSON, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            if not isinstance(data, dict):
-                return {}
-            return data
-    except (FileNotFoundError, json.JSONDecodeError):
-        return {}
-
-
-def save_user_preferences(data: dict):
-    with open(USER_PREFERENCES_JSON, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
-
-
 def get_preferences(chat_id: str) -> dict:
-    all_preferences = load_user_preferences()
-    return _normalize_preferences(all_preferences.get(str(chat_id)))
+    init_db()
+    return _normalize_preferences(db_get_preferences(str(chat_id)))
 
 
 def update_preferences(chat_id: str, **updates):
-    all_preferences = load_user_preferences()
-    current = _normalize_preferences(all_preferences.get(str(chat_id)))
+    init_db()
+    current = _normalize_preferences(db_get_preferences(str(chat_id)))
 
     for key, value in updates.items():
         if key == "quiet_hours_start":
@@ -118,22 +97,15 @@ def update_preferences(chat_id: str, **updates):
         elif key in {"delivery_mode", "max_items_per_push", "only_top_news"}:
             current[key] = value
 
-    all_preferences[str(chat_id)] = _normalize_preferences(current)
-    save_user_preferences(all_preferences)
-    return all_preferences[str(chat_id)]
+    updated = _normalize_preferences(current)
+    db_save_user_preferences(str(chat_id), updated)
+    return updated
 
 def add_user_source(user_id: str, name: str, url: str):
     """Добавляет источник для конкретного пользователя"""
-    user_sources = load_user_sources()
-    
-    if user_id not in user_sources:
-        user_sources[user_id] = {}
-    
-    if name in user_sources[user_id]:
+    init_db()
+    if not db_add_user_source(user_id, name, url):
         return "⚠️ У вас уже есть такой источник!"
-    
-    user_sources[user_id][name] = url
-    save_user_sources(user_sources)
     return f"✅ Источник {name} добавлен в вашу коллекцию!"
 
 async def get_random_news(user_id: str):
@@ -151,7 +123,8 @@ async def get_random_news(user_id: str):
 
 def get_user_sources(user_id: str):
     """Возвращает все источники пользователя (стандартные + свои)"""
-    user_sources = load_user_sources().get(str(user_id), {})
+    init_db()
+    user_sources = get_user_sources_for_user(str(user_id))
     return {**NEWS_SOURCES, **user_sources}  # Объединяем словари
 
 async def get_latest_news(user_id: str, source: str, is_category: bool = False) -> list:
@@ -213,11 +186,10 @@ def build_digest_message(news_items: list[str]) -> str:
 
 
 async def send_auto_news(bot: Bot):
+    init_db()
     while True:
         try:
-            # Читаем ID групп из файла
-            with open(GROUPS_FILE, "r") as f:
-                group_ids = f.read().splitlines()
+            group_ids = get_bot_group_ids()
             
             # Отправляем новость в каждую группу с учетом настроек
             for chat_id in group_ids:
@@ -263,13 +235,9 @@ async def send_auto_news(bot: Bot):
 
 def remove_user_source(user_id: str, source_name: str):
     """Удаляет источник пользователя"""
-    user_sources = load_user_sources()
-    
-    if user_id not in user_sources or source_name not in user_sources[user_id]:
+    init_db()
+    if not db_remove_user_source(user_id, source_name):
         return "❌ Этот источник нельзя удалить (он стандартный или отсутствует)"
-    
-    del user_sources[user_id][source_name]
-    save_user_sources(user_sources)
     return f"✅ Источник '{source_name}' удален!"
 
 async def get_top_news(user_id: str, limit: int = 5) -> list:
