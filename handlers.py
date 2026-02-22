@@ -1,5 +1,11 @@
 from aiogram import Router
-from aiogram.types import Message, ReplyKeyboardRemove
+from aiogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    Message,
+    ReplyKeyboardRemove,
+)
 from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
@@ -21,11 +27,49 @@ from keyboards import (
 )
 from config import NEWS_CATEGORIES, GROUPS_FILE
 from logger import logger  # Импортируем логер
+from formatters import format_news_batch
+from uuid import uuid4
 
 from aiogram.filters import ChatMemberUpdatedFilter, IS_NOT_MEMBER, IS_MEMBER
 from aiogram.types import ChatMemberUpdated
 
 router = Router()
+
+NEWS_BATCH_SIZE = 4
+news_sessions: dict[str, dict] = {}
+
+
+def _build_news_keyboard(session_id: str, page: int, total_items: int) -> InlineKeyboardMarkup:
+    next_exists = (page + 1) * NEWS_BATCH_SIZE < total_items
+    buttons = []
+
+    if next_exists:
+        buttons.append(InlineKeyboardButton(text="Ещё", callback_data=f"news:more:{session_id}:{page + 1}"))
+
+    buttons.append(InlineKeyboardButton(text="Сменить источник", callback_data=f"news:switch:{session_id}:{page}"))
+    buttons.append(InlineKeyboardButton(text="Скрыть", callback_data=f"news:hide:{session_id}:{page}"))
+
+    return InlineKeyboardMarkup(inline_keyboard=[buttons])
+
+
+async def _send_news_batch(message: Message, user_id: str, news_list: list[str], title: str, origin: str):
+    valid_news = [news for news in news_list if isinstance(news, str) and news.strip()]
+    if not valid_news:
+        await message.answer("😢 Не удалось загрузить новости.")
+        return
+
+    session_id = uuid4().hex[:8]
+    news_sessions[session_id] = {
+        "user_id": user_id,
+        "items": valid_news,
+        "title": title,
+        "origin": origin,
+    }
+
+    first_batch = valid_news[:NEWS_BATCH_SIZE]
+    text = format_news_batch(first_batch, start_index=1, title=title)
+    keyboard = _build_news_keyboard(session_id, page=0, total_items=len(valid_news))
+    await message.answer(text, parse_mode="HTML", disable_web_page_preview=True, reply_markup=keyboard)
 
 
 class SourceForm(StatesGroup):
@@ -56,18 +100,7 @@ async def handle_sources_command(message: Message):
 @router.message(Command("news"))
 async def random_news(message: Message):
     news_list = await get_random_news(str(message.from_user.id))
-
-    if not news_list or not isinstance(news_list, list):
-        await message.answer("😢 Не удалось загрузить новости.")
-        return
-
-    valid_news = [news for news in news_list if isinstance(news, str) and news.strip()]
-    if not valid_news:
-        await message.answer("😢 Не удалось загрузить новости.")
-        return
-
-    for news in valid_news:
-        await message.answer(news)
+    await _send_news_batch(message, str(message.from_user.id), news_list, "🎲 Случайные новости", "random")
 
 @router.message(lambda message: message.text == "⚙️ Управление источниками")
 async def handle_sources_button(message: Message):
@@ -91,9 +124,8 @@ async def handle_choose_category_button(message: Message):
 async def handle_random_news_button(message: Message):
     user_id = str(message.from_user.id)
     logger.info(f"Пользователь {user_id} запросил случайные новости.")
-    news_list = await get_random_news(user_id)  # Добавьте await
-    for news in news_list:
-        await message.answer(news)
+    news_list = await get_random_news(user_id)
+    await _send_news_batch(message, user_id, news_list, "🎲 Случайные новости", "random")
 
 @router.message(lambda message: message.text == "📌 Основные новости")
 async def handle_top_news_button(message: Message):
@@ -197,12 +229,7 @@ async def handle_send_source_news(message: Message):
     
     news_list = await get_latest_news(user_id, source)
     
-    if not news_list:
-        await message.answer("😢 Не удалось загрузить новости.")
-        return
-    
-    for news in news_list:
-        await message.answer(news)  # Теперь news гарантированно строка
+    await _send_news_batch(message, user_id, news_list, f"📰 {source}", "source")
 
 @router.message(lambda message: message.text in NEWS_CATEGORIES)
 async def handle_send_category_news(message: Message):
@@ -212,12 +239,49 @@ async def handle_send_category_news(message: Message):
     
     news_list = await get_latest_news(user_id, category, is_category=True)
     
-    if not news_list:
-        await message.answer("😢 В этой категории пока нет новостей.")
+    await _send_news_batch(message, user_id, news_list, f"📂 {category}", "category")
+
+
+@router.callback_query(lambda c: c.data and c.data.startswith("news:"))
+async def handle_news_pagination(callback: CallbackQuery):
+    _, action, session_id, page_str = callback.data.split(":")
+    session = news_sessions.get(session_id)
+
+    if not session or str(callback.from_user.id) != session["user_id"]:
+        await callback.answer("Сессия устарела", show_alert=True)
         return
-    
-    for news in news_list:
-        await message.answer(news)
+
+    page = int(page_str)
+    total_items = len(session["items"])
+
+    if action == "hide":
+        await callback.message.delete()
+        await callback.answer("Скрыто")
+        return
+
+    if action == "switch":
+        origin = session.get("origin")
+        if origin == "source":
+            await callback.message.answer("Выбери источник:", reply_markup=sources_menu(session["user_id"]))
+        elif origin == "category":
+            await callback.message.answer("Выбери категорию:", reply_markup=categories_menu())
+        else:
+            await callback.message.answer("Выбери действие:", reply_markup=main_menu())
+        await callback.answer()
+        return
+
+    start = page * NEWS_BATCH_SIZE
+    end = start + NEWS_BATCH_SIZE
+    batch = session["items"][start:end]
+
+    if not batch:
+        await callback.answer("Больше новостей нет")
+        return
+
+    text = format_news_batch(batch, start_index=start + 1, title=session["title"])
+    keyboard = _build_news_keyboard(session_id, page=page, total_items=total_items)
+    await callback.message.edit_text(text, parse_mode="HTML", disable_web_page_preview=True, reply_markup=keyboard)
+    await callback.answer()
 
 
 @router.message()
