@@ -1,4 +1,4 @@
-TOKEN = ''
+TOKEN = os.getenv("BOT_TOKEN")
 
 
 NEWS_SOURCES = {
