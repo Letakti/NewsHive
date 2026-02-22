@@ -1,6 +1,8 @@
 from aiogram import Router
 from aiogram.types import Message, ReplyKeyboardRemove
-from aiogram.filters import Command
+from aiogram.filters import Command, StateFilter
+from aiogram.fsm.context import FSMContext
+from aiogram.fsm.state import State, StatesGroup
 from parser import (
     add_user_source,
     get_user_sources,
@@ -24,7 +26,12 @@ from aiogram.filters import ChatMemberUpdatedFilter, IS_NOT_MEMBER, IS_MEMBER
 from aiogram.types import ChatMemberUpdated
 
 router = Router()
-user_states = {}
+
+
+class SourceForm(StatesGroup):
+    waiting_for_source_name = State()
+    waiting_for_source_url = State()
+    waiting_source_to_remove = State()
 
 @router.message(Command("start"))
 async def start(message: Message):
@@ -104,51 +111,67 @@ async def handle_top_news_button(message: Message):
     )
 
 @router.message(lambda message: message.text == "➕ Добавить источник")
-async def handle_add_source_button(message: Message):
+async def handle_add_source_button(message: Message, state: FSMContext):
     user_id = str(message.from_user.id)
     logger.info(f"Пользователь {user_id} начал добавление источника.")
-    user_states[user_id] = "waiting_for_source_name"  # Состояние: ожидание названия
+    await state.set_state(SourceForm.waiting_for_source_name)
     await message.answer("Введите название нового источника:", reply_markup=ReplyKeyboardRemove())
 
-@router.message(lambda message: message.text == "🔙 Назад" 
-                and user_states.get(str(message.from_user.id)) == "waiting_source_to_remove")
-async def handle_back_during_removal(message: Message):
-    user_id = str(message.from_user.id)
-    del user_states[user_id]  # Сбрасываем состояние
+@router.message(StateFilter(SourceForm.waiting_source_to_remove), lambda message: message.text == "🔙 Назад")
+async def handle_back_during_removal(message: Message, state: FSMContext):
+    await state.clear()
     await message.answer("Возвращаемся в меню управления:", reply_markup=manage_sources_menu())
 
 @router.message(lambda message: message.text == "🔙 Назад")
-async def handle_back_button(message: Message):
+async def handle_back_button(message: Message, state: FSMContext):
     logger.info(f"Пользователь {message.from_user.id} нажал кнопку 'Назад'.")
-    user_id = str(message.from_user.id)
-    if user_id in user_states:
-        del user_states[user_id]  # Сбрасываем состояние
+    await state.clear()
     await message.answer("Возвращаемся в главное меню:", reply_markup=main_menu())
 
 @router.message(lambda message: message.text == "➖ Удалить источник")
-async def handle_remove_source_button(message: Message):
+async def handle_remove_source_button(message: Message, state: FSMContext):
     user_id = str(message.from_user.id)
     user_sources = load_user_sources().get(user_id, {})
     
     if not user_sources:
         await message.answer("❌ У вас нет пользовательских источников.")
         return
-    
-    user_states[user_id] = "waiting_source_to_remove"
+
+    await state.set_state(SourceForm.waiting_source_to_remove)
     await message.answer("Выберите источник для удаления:", 
                         reply_markup=user_sources_menu(user_id))  # Используем существующее меню
     
 # Обработчик удаления источника (должен быть ПЕРВЫМ)
-@router.message(lambda message: user_states.get(str(message.from_user.id)) == "waiting_source_to_remove")
-async def handle_source_removal(message: Message):
+@router.message(StateFilter(SourceForm.waiting_source_to_remove))
+async def handle_source_removal(message: Message, state: FSMContext):
     user_id = str(message.from_user.id)
     source_name = message.text
     result = remove_user_source(user_id, source_name)
-    
-    if "✅" in result:
-        del user_states[user_id]  # Сбрасываем состояние только при успешном удалении
-    
+
+    await state.clear()
     await message.answer(result, reply_markup=manage_sources_menu())
+
+
+@router.message(StateFilter(SourceForm.waiting_for_source_name))
+async def handle_source_name_input(message: Message, state: FSMContext):
+    user_id = str(message.from_user.id)
+    logger.info(f"Пользователь {user_id} ввел название источника: {message.text}")
+    await state.update_data(source_name=message.text)
+    await state.set_state(SourceForm.waiting_for_source_url)
+    await message.answer("Теперь отправьте ссылку на RSS-ленту:")
+
+
+@router.message(StateFilter(SourceForm.waiting_for_source_url))
+async def handle_source_url_input(message: Message, state: FSMContext):
+    user_id = str(message.from_user.id)
+    logger.info(f"Пользователь {user_id} ввел ссылку: {message.text}")
+    data = await state.get_data()
+    source_name = data.get("source_name")
+    url = message.text
+    result = add_user_source(user_id, source_name, url)
+    await state.clear()
+    await message.answer(result, reply_markup=sources_menu(user_id))
+    await message.answer(result, reply_markup=main_menu())
 
 @router.message(lambda message: message.text == "📋 Мои источники")
 async def handle_show_user_sources_button(message: Message):
@@ -205,6 +228,8 @@ async def handle_custom_source(message: Message):
     if message.text in ["📰 Новости по источнику", "📂 Новости по категории", "🎲 Рандомные новости", "➕ Добавить источник", "🔙 Назад"]:
         return
     
+    # Если сообщение не обработано другими обработчиками
+    await message.answer("Не понимаю команду 😢")
     if user_states.get(user_id) == "waiting_source_to_remove":
         source_name = message.text
         result = remove_user_source(user_id, source_name)
