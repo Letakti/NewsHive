@@ -127,7 +127,7 @@ async def handle_choose_news_source(message: Message):
     user_id = str(message.from_user.id)
     await message.answer(
         "Выбери источник:",
-        reply_markup=sources_menu(user_id)
+        reply_markup=await sources_menu(user_id)
     )
 
 @router.message(lambda message: message.text == "📂 Новости по категории")
@@ -186,7 +186,7 @@ async def handle_remove_source_button(message: Message, state: FSMContext):
 
     await state.set_state(SourceForm.waiting_source_to_remove)
     await message.answer("Выберите источник для удаления:", 
-                        reply_markup=user_sources_menu(user_id))  # Используем существующее меню
+                        reply_markup=await user_sources_menu(user_id))  # Используем существующее меню
     
 # Обработчик удаления источника (должен быть ПЕРВЫМ)
 @router.message(StateFilter(SourceForm.waiting_source_to_remove))
@@ -217,7 +217,7 @@ async def handle_source_url_input(message: Message, state: FSMContext):
     url = message.text
     result = await add_user_source(user_id, source_name, url)
     await state.clear()
-    await message.answer(result, reply_markup=sources_menu(user_id))
+    await message.answer(result, reply_markup=await sources_menu(user_id))
     await message.answer(result, reply_markup=main_menu())
 
 @router.message(lambda message: message.text == "📋 Мои источники")
@@ -280,7 +280,7 @@ async def handle_news_pagination(callback: CallbackQuery):
     if action == "switch":
         origin = session.get("origin")
         if origin == "source":
-            await callback.message.answer("Выбери источник:", reply_markup=sources_menu(session["user_id"]))
+            await callback.message.answer("Выбери источник:", reply_markup=await sources_menu(session["user_id"]))
         elif origin == "category":
             await callback.message.answer("Выбери категорию:", reply_markup=categories_menu())
         else:
@@ -360,7 +360,7 @@ async def handle_custom_source(message: Message):
 
         if "✅" in result:
             del user_states[user_id]  # Удаляем состояние только при успешном добавлении
-            await message.answer(result, reply_markup=sources_menu(user_id))
+            await message.answer(result, reply_markup=await sources_menu(user_id))
         else:
             await message.answer(result, reply_markup=main_menu())
     
