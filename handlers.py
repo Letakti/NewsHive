@@ -105,8 +105,8 @@ async def handle_top_news_button(message: Message):
         return
     
     await message.answer(
-        "📌 **Главные новости:**\n\n" + "\n".join(news_list),
-        parse_mode="Markdown",
+        "📌 <b>Главные новости:</b>\n\n" + "\n".join(news_list),
+        parse_mode="HTML",
         disable_web_page_preview=True
     )
 
@@ -230,6 +230,35 @@ async def handle_custom_source(message: Message):
     
     # Если сообщение не обработано другими обработчиками
     await message.answer("Не понимаю команду 😢")
+    if user_states.get(user_id) == "waiting_source_to_remove":
+        source_name = message.text
+        result = remove_user_source(user_id, source_name)
+        del user_states[user_id]
+        await message.answer(result, reply_markup=manage_sources_menu())
+        return
+    
+    if user_states.get(user_id) == "waiting_for_source_name":
+        logger.info(f"Пользователь {user_id} ввел название источника: {message.text}")
+        # Пользователь ввел название → переводим в состояние ожидания ссылки
+        user_states[user_id] = {"status": "waiting_for_url", "source_name": message.text}
+        await message.answer("Теперь отправьте ссылку на RSS-ленту:")
+    
+    elif user_states.get(user_id) and user_states[user_id].get("status") == "waiting_for_url":
+        logger.info(f"Пользователь {user_id} ввел ссылку: {message.text}")
+        # Пользователь ввел ссылку → сохраняем источник
+        source_name = user_states[user_id]["source_name"]
+        url = message.text
+        result = add_user_source(user_id, source_name, url)
+
+        if "✅" in result:
+            del user_states[user_id]  # Удаляем состояние только при успешном добавлении
+            await message.answer(result, reply_markup=sources_menu(user_id))
+        else:
+            await message.answer(result, reply_markup=main_menu())
+    
+    else:
+        # Если сообщение не обработано другими обработчиками
+        await message.answer("Не понимаю команду 😢")
 
 
 @router.chat_member(ChatMemberUpdatedFilter(IS_NOT_MEMBER >> IS_MEMBER))

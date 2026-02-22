@@ -1,6 +1,7 @@
 import aiohttp
 import feedparser
 import random
+import html
 from config import NEWS_SOURCES, NEWS_CATEGORIES, GROUPS_FILE
 from aiogram import Bot
 import asyncio
@@ -150,7 +151,14 @@ async def get_top_news(user_id: str, limit: int = 5) -> list:
     
     # Форматируем вывод
     formatted_news = []
-    for idx, news in enumerate(all_news[:limit], 1):
-        formatted_news.append(f"{idx}. [{news['title']}]({news['link']})")
+    for news in all_news[:limit]:
+        link = news.get("link", "")
+        if not link:
+            continue
+
+        safe_link = html.escape(link, quote=True)
+        title = html.escape(news.get("title", "Без названия"))
+        item_index = len(formatted_news) + 1
+        formatted_news.append(f'{item_index}. <a href="{safe_link}">{title}</a>')
     
     return formatted_news if formatted_news else []
