@@ -98,8 +98,8 @@ async def handle_top_news_button(message: Message):
         return
     
     await message.answer(
-        "📌 **Главные новости:**\n\n" + "\n".join(news_list),
-        parse_mode="Markdown",
+        "📌 <b>Главные новости:</b>\n\n" + "\n".join(news_list),
+        parse_mode="HTML",
         disable_web_page_preview=True
     )
 
