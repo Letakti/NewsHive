@@ -50,7 +50,8 @@ async def _connect() -> aiosqlite.Connection:
 
 async def init_db() -> None:
     async with _DB_SEMAPHORE:
-        async with await _connect() as conn:
+        conn = await _connect()
+        try:
             await conn.execute(
                 """
                 CREATE TABLE IF NOT EXISTS user_sources (
@@ -84,16 +85,21 @@ async def init_db() -> None:
                 """
             )
             await conn.commit()
+        finally:
+            await conn.close()
 
 
 async def _execute_write(query: str, params: tuple = ()) -> aiosqlite.Cursor:
     try:
         async with _DB_SEMAPHORE:
-            async with await _connect() as conn:
+            conn = await _connect()
+            try:
                 await conn.execute("BEGIN")
                 cursor = await conn.execute(query, params)
                 await conn.commit()
                 return cursor
+            finally:
+                await conn.close()
     except sqlite3.Error as exc:
         logger.exception("DB write failed: %s | params=%s", query, params)
         raise exc
@@ -108,13 +114,16 @@ async def get_user_sources_for_user(user_id: str) -> dict[str, str]:
     params = (str(user_id),)
     try:
         async with _DB_SEMAPHORE:
-            async with await _connect() as conn:
+            conn = await _connect()
+            try:
                 rows = await (
                     await conn.execute(
                         "SELECT source_name, source_url FROM user_sources WHERE user_id = ? ORDER BY created_at DESC",
                         params,
                     )
                 ).fetchall()
+            finally:
+                await conn.close()
     except sqlite3.Error as exc:
         _log_db_error(query, params, exc)
         return {}
@@ -151,7 +160,8 @@ async def load_user_preferences() -> dict[str, dict]:
             """
     try:
         async with _DB_SEMAPHORE:
-            async with await _connect() as conn:
+            conn = await _connect()
+            try:
                 rows = await (
                     await conn.execute(
                         """
@@ -160,6 +170,8 @@ async def load_user_preferences() -> dict[str, dict]:
                         """,
                     )
                 ).fetchall()
+            finally:
+                await conn.close()
     except sqlite3.Error as exc:
         _log_db_error(query, (), exc)
         return {}
@@ -184,7 +196,8 @@ async def get_preferences(user_id: str) -> dict | None:
     params = (str(user_id),)
     try:
         async with _DB_SEMAPHORE:
-            async with await _connect() as conn:
+            conn = await _connect()
+            try:
                 row = await (
                     await conn.execute(
                         """
@@ -195,6 +208,8 @@ async def get_preferences(user_id: str) -> dict | None:
                         params,
                     )
                 ).fetchone()
+            finally:
+                await conn.close()
     except sqlite3.Error as exc:
         _log_db_error(query, params, exc)
         return None
@@ -297,8 +312,11 @@ async def get_bot_group_ids() -> list[str]:
     query = "SELECT chat_id FROM bot_groups"
     try:
         async with _DB_SEMAPHORE:
-            async with await _connect() as conn:
+            conn = await _connect()
+            try:
                 rows = await (await conn.execute(query)).fetchall()
+            finally:
+                await conn.close()
     except sqlite3.Error as exc:
         _log_db_error(query, (), exc)
         return []
